@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Seven Lakes Financial Services Inc. | Sun Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D3350;
+    --navy-mid: #1a4a6b;
+    --gold: #C9A84C;
+    --gold-light: #e8c96a;
+    --gold-pale: #faf4e4;
+    --tan: #b5956a;
+    --cream: #fdfaf5;
+    --white: #ffffff;
+    --text-dark: #1a2a35;
+    --text-mid: #4a6070;
+    --text-light: #8aa0b0;
+    --border: rgba(13,51,80,0.1);
+    --green: #1D9E75;
+    --rose: #993556;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 68px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-sun { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .logo-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+  .logo-text { line-height: 1.2; }
+  .logo-text strong { display: block; color: #fff; font-size: 14px; font-weight: 500; }
+  .logo-text span { color: var(--gold); font-size: 11px; letter-spacing: 0.4px; }
+  .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: #fff; }
+  .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: -100px; right: -60px; width: 460px; height: 460px; border-radius: 50%; background: rgba(201,168,76,0.05); pointer-events: none; }
+  .page-hero::after  { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 60px; background: var(--cream); border-radius: 40px 40px 0 0; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; position: relative; z-index: 1; }
+  .breadcrumb a { color: rgba(255,255,255,0.4); font-size: 12px; text-decoration: none; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span { color: rgba(255,255,255,0.2); font-size: 12px; }
+  .breadcrumb strong { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 400; }
+  .hero-inner { position: relative; z-index: 1; max-width: 700px; }
+  .eyebrow { display: inline-block; color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 50px; font-weight: 500; color: #fff; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { color: rgba(255,255,255,0.55); font-size: 18px; line-height: 1.7; font-weight: 300; margin-bottom: 32px; }
+  .service-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+  .snav-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.65); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 16px; border-radius: 30px; cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+  .snav-btn:hover { background: rgba(255,255,255,0.13); color: #fff; border-color: rgba(255,255,255,0.25); }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip { background: var(--white); padding: 3.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; border-bottom: 1px solid var(--border); }
+  .strip-item { display: flex; align-items: flex-start; gap: 14px; }
+  .strip-icon { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; }
+  .strip-item h4 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .strip-item p { font-size: 13px; color: var(--text-mid); line-height: 1.55; font-weight: 300; }
+
+  /* ── SECTION SHARED ── */
+  .svc-section { padding: 5rem 3rem; scroll-margin-top: 80px; }
+  .svc-section.alt { background: var(--white); }
+  .svc-header { display: grid; grid-template-columns: auto 1fr; gap: 0 2rem; align-items: start; margin-bottom: 3rem; }
+  .svc-number { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 600; color: rgba(13,51,80,0.07); line-height: 1; margin-top: -10px; }
+  .svc-header-right h2 { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 500; color: var(--navy); line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .svc-header-right p { color: var(--text-mid); font-size: 16px; line-height: 1.75; font-weight: 300; max-width: 620px; }
+
+  .svc-body { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+  .svc-body.flip { direction: rtl; }
+  .svc-body.flip > * { direction: ltr; }
+
+  .svc-detail p { color: var(--text-mid); font-size: 15px; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+  .svc-detail p strong { color: var(--navy); font-weight: 500; }
+
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .bullet-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .bullet-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
+
+  .svc-card-stack { display: flex; flex-direction: column; gap: 12px; }
+  .mini-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: border-color 0.2s, transform 0.2s; }
+  .mini-card:hover { border-color: var(--gold); transform: translateX(4px); }
+  .mc-icon { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; flex-shrink: 0; }
+  .mini-card h4 { font-size: 13.5px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+  .mini-card p { font-size: 12.5px; color: var(--text-mid); line-height: 1.5; font-weight: 300; }
+
+  .svc-divider { border: none; border-top: 1px solid var(--border); margin: 0 3rem; }
+
+  /* ── WHO IT'S FOR TAGS ── */
+  .who-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+  .who-label { font-size: 12px; color: var(--text-light); }
+  .who-tag { background: var(--gold-pale); border: 1px solid rgba(201,168,76,0.25); color: var(--tan); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+
+  /* ── COMPARISON TABLE ── */
+  .table-wrap { overflow-x: auto; margin-top: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; background: var(--white); }
+  thead th { background: var(--navy); color: #fff; font-size: 13px; font-weight: 500; padding: 14px 18px; text-align: left; }
+  thead th:first-child { border-radius: var(--radius) 0 0 0; }
+  thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--gold-pale); }
+  tbody td { padding: 13px 18px; font-size: 13.5px; color: var(--text-mid); font-weight: 300; vertical-align: top; }
+  tbody td:first-child { color: var(--navy); font-weight: 500; }
+  .tick { color: var(--green); font-size: 15px; }
+
+  /* ── INSURANCE GRID ── */
+  .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 2rem; }
+  .ins-card { border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 28px 24px; background: var(--white); transition: border-color 0.25s, transform 0.2s; }
+  .ins-card:hover { transform: translateY(-3px); }
+  .ins-card.gold  { border-top: 3px solid var(--gold); }
+  .ins-card.navy  { border-top: 3px solid var(--navy); }
+  .ins-card.rose  { border-top: 3px solid var(--rose); }
+  .ins-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
+  .ins-card .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+  .ins-card p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; font-weight: 300; margin-bottom: 14px; }
+  .ins-features { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .ins-features li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); font-weight: 300; }
+  .ins-features li::before { content: '✓'; color: var(--green); font-size: 13px; flex-shrink: 0; }
+
+  /* ── ACCOUNT TABLE ── */
+  .acct-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .acct-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; transition: border-color 0.2s, transform 0.2s; }
+  .acct-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .acct-abbr { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .acct-full { font-size: 11px; color: var(--text-light); margin-bottom: 12px; line-height: 1.3; }
+  .acct-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .acct-badge { display: inline-block; margin-top: 12px; font-size: 11px; padding: 3px 10px; border-radius: 20px; }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: var(--gold); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+  .cta-band p { color: rgba(13,51,80,0.65); font-size: 15px; font-weight: 300; }
+  .btn-primary { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-navy { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-navy:hover { background: var(--navy-mid); }
+  .btn-outline-navy { background: transparent; color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 12px 24px; border-radius: 9px; border: 1.5px solid var(--navy); cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-outline-navy:hover { background: rgba(13,51,80,0.06); }
+
+  /* ── FOOTER ── */
+  footer { background: #091f30; padding: 3rem; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand strong { display: block; color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .footer-brand .sub { color: var(--gold); font-size: 11.5px; }
+  .footer-brand p { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.65; margin-top: 12px; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .footer-sun { display: flex; align-items: center; gap: 8px; }
+  .sun-dot { width: 22px; height: 22px; background: var(--gold); border-radius: 50%; }
+  .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .intro-strip { grid-template-columns: 1fr 1fr; }
+    .svc-body, .svc-body.flip { grid-template-columns: 1fr; direction: ltr; }
+    .ins-grid { grid-template-columns: 1fr 1fr; }
+    .acct-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 3.5rem 1.5rem 3rem; }
+    .svc-section { padding: 3.5rem 1.5rem; }
+    .svc-divider { margin: 0 1.5rem; }
+    .intro-strip { padding: 2.5rem 1.5rem; grid-template-columns: 1fr; gap: 1.5rem; }
+    .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .svc-header { grid-template-columns: 1fr; }
+    .svc-number { display: none; }
+  }
+  @media (max-width: 600px) {
+    .page-hero h1 { font-size: 36px; }
+    .ins-grid, .acct-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-sun">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="4.5" fill="#0D3350"/>
+        <line x1="10" y1="1.5" x2="10" y2="4"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="10" y1="16" x2="10" y2="18.5"  stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="1.5" y1="10" x2="4"  y2="10"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="16"  y1="10" x2="18.5" y2="10" stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="3.9" y1="3.9" x2="5.7" y2="5.7"     stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="14.3" y1="14.3" x2="16.1" y2="16.1" stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="16.1" y1="3.9" x2="14.3" y2="5.7"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="5.7" y1="14.3" x2="3.9" y2="16.1"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-divider"></div>
+    <div class="logo-text">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <span>Sun Life &nbsp;·&nbsp; Carrie Wang, CEA, CLU®</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="market.html">Market</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>›</span><strong>Services</strong>
+  </div>
+  <div class="hero-inner">
+    <span class="eyebrow">What Carrie offers</span>
+    <h1>Financial solutions <em>for every stage of life</em></h1>
+    <p class="hero-sub">From growing your wealth and protecting your family, to planning your retirement and securing your legacy — Carrie provides personalized guidance every step of the way.</p>
+    <div class="service-nav">
+      <a class="snav-btn" href="#retirement">Retirement</a>
+      <a class="snav-btn" href="#estate">Estate planning</a>
+      <a class="snav-btn" href="#business">Business solutions</a>
+      <a class="snav-btn" href="#investments">Investments</a>
+      <a class="snav-btn" href="#insurance">Life insurance</a>
+      <a class="snav-btn" href="#critical">Critical illness</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="strip-item">
+    <div class="strip-icon" style="background:#e8f0f6;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17C6 15.5 3 12.5 3 9V5l7-3 7 3v4c0 3.5-3 6.5-7 8z" stroke="#0D3350" stroke-width="1.5"/></svg>
+    </div>
+    <div>
+      <h4>Personalized to you</h4>
+      <p>No two clients are the same. Every plan is built around your unique goals, family situation, and financial picture.</p>
+    </div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon" style="background:#faf3e0;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#C9A84C" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div>
+      <h4>Sun Life backed solutions</h4>
+      <p>Access to one of Canada's most comprehensive portfolios of insurance and investment products, backed by over 150 years of trust.</p>
+    </div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon" style="background:#e6f4ee;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" stroke="#1D9E75" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div>
+      <h4>Ongoing relationship</h4>
+      <p>Carrie reviews and adapts your plan as your life changes — staying by your side through every new chapter.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 1. RETIREMENT ── -->
+<section class="svc-section" id="retirement">
+  <div class="svc-header">
+    <div class="svc-number">01</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">Planning for your future</span>
+      <h2>Retirement planning</h2>
+      <p>A confident retirement doesn't happen by accident — it's the result of thoughtful, early planning. Carrie helps you build a clear roadmap so you can stop working on your terms, with the income you need to live the life you've imagined.</p>
+    </div>
+  </div>
+  <div class="svc-body">
+    <div class="svc-detail">
+      <p>Retirement planning starts with understanding where you are today and where you want to be. Carrie reviews your current savings, income sources, and projected expenses to identify gaps and create a strategy that bridges them.</p>
+      <p><strong>Key areas Carrie covers:</strong></p>
+      <ul class="bullet-list">
+        <li>RRSP contribution strategy and optimization — maximizing tax deferrals now for greater income later</li>
+        <li>CPP and OAS timing analysis — when to start benefits for maximum lifetime income</li>
+        <li>Pension review and income projection — understanding what your workplace pension actually provides</li>
+        <li>Retirement income drawdown strategy — structuring withdrawals to minimize tax over your lifetime</li>
+        <li>Integration of TFSA, RRSP, and non-registered assets into a cohesive retirement income plan</li>
+        <li>Longevity and care planning — ensuring your plan accounts for a long, healthy retirement</li>
+      </ul>
+      <div class="who-row">
+        <span class="who-label">Ideal for:</span>
+        <span class="who-tag">Working professionals</span>
+        <span class="who-tag">Pre-retirees (50s–60s)</span>
+        <span class="who-tag">Business owners</span>
+        <span class="who-tag">New Canadians</span>
+      </div>
+    </div>
+    <div class="svc-card-stack">
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e8f0f6;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#0D3350" stroke-width="1.5"/><path d="M2 9h16" stroke="#0D3350" stroke-width="1.5"/></svg></div>
+        <div><h4>RRSP planning</h4><p>Strategic contributions that reduce your tax bill today while growing wealth for retirement.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#faf3e0;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><polyline points="2,15 6,9 10,12 16,5" stroke="#C9A84C" stroke-width="1.5" fill="none"/></svg></div>
+        <div><h4>Income projection</h4><p>Realistic projections showing exactly how much you'll have and where it comes from.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e6f4ee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 17C6 15.5 3 12.5 3 9V5l7-3 7 3v4c0 3.5-3 6.5-7 8z" stroke="#1D9E75" stroke-width="1.5"/></svg></div>
+        <div><h4>CPP &amp; OAS optimization</h4><p>Deciding the right time to start government benefits to maximize lifetime income.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#f5eaee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#993556" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="#993556" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h4>Drawdown strategy</h4><p>A tax-efficient plan for which accounts to draw from first — and when.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="svc-divider">
+
+<!-- ── 2. ESTATE PLANNING ── -->
+<section class="svc-section alt" id="estate">
+  <div class="svc-header">
+    <div class="svc-number">02</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">Protecting your legacy</span>
+      <h2>Estate planning</h2>
+      <p>Estate planning is one of the most loving things you can do for the people you care about. Carrie helps you structure your affairs so that your wishes are honoured and your family is protected — without confusion, conflict, or unnecessary costs.</p>
+    </div>
+  </div>
+  <div class="svc-body flip">
+    <div class="svc-detail">
+      <p>With her <strong>Certified Executor Advisor (CEA)</strong> designation, Carrie brings specialized expertise in estate administration — helping you and your family navigate the executor process with clarity and confidence.</p>
+      <p><strong>Estate planning services include:</strong></p>
+      <ul class="bullet-list">
+        <li>Beneficiary designation review — ensuring your assets flow to the right people efficiently</li>
+        <li>Estate equalization strategies using life insurance to fairly distribute assets among heirs</li>
+        <li>Executor guidance — helping your executor understand their duties and responsibilities</li>
+        <li>Charitable giving strategies — leaving a meaningful legacy to causes you care about</li>
+        <li>Minimizing probate and estate taxes through thoughtful ownership and beneficiary structures</li>
+        <li>Reviewing and coordinating your estate plan with your will and powers of attorney</li>
+      </ul>
+      <div class="who-row">
+        <span class="who-label">Ideal for:</span>
+        <span class="who-tag">Families with dependants</span>
+        <span class="who-tag">Business owners</span>
+        <span class="who-tag">High-net-worth individuals</span>
+        <span class="who-tag">Blended families</span>
+      </div>
+    </div>
+    <div class="svc-card-stack">
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#faf3e0;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 5v5c0 4-4 7-8 8-4-1-8-4-8-8V7l8-5z" stroke="#C9A84C" stroke-width="1.5"/></svg></div>
+        <div><h4>Beneficiary review</h4><p>Making sure your life insurance, RRSP, and TFSA flow exactly as you intend.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e8f0f6;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="4" y="2" width="12" height="16" rx="2" stroke="#0D3350" stroke-width="1.5"/><path d="M7 7h6M7 10h6M7 13h4" stroke="#0D3350" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div><h4>CEA — Executor support</h4><p>Certified expertise to help you and your estate's executor navigate the process.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e6f4ee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" stroke="#1D9E75" stroke-width="1.5"/><path d="M3 18c0-4 3-6 7-6s7 2 7 6" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h4>Estate equalization</h4><p>Using life insurance to fairly distribute wealth among heirs when assets can't be split equally.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#faf3e0;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5l5 5-5 5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h4>Charitable giving</h4><p>Strategies to leave a meaningful gift to your community or causes you care about.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="svc-divider">
+
+<!-- ── 3. BUSINESS SOLUTIONS ── -->
+<section class="svc-section" id="business">
+  <div class="svc-header">
+    <div class="svc-number">03</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">For entrepreneurs &amp; business owners</span>
+      <h2>Business owner solutions</h2>
+      <p>Running a business is rewarding — but it comes with unique financial risks and complexities that personal planning alone can't address. Carrie specializes in helping business owners protect what they've built and plan confidently for what comes next.</p>
+    </div>
+  </div>
+  <div class="svc-body">
+    <div class="svc-detail">
+      <p>Whether you're a sole proprietor, incorporated professional, or the owner of a growing company, Carrie designs strategies that address both your personal and corporate financial needs in a coordinated, tax-efficient way.</p>
+      <ul class="bullet-list">
+        <li><strong>Key person insurance</strong> — protecting your business if you or a vital team member becomes unable to work</li>
+        <li><strong>Buy-sell agreement funding</strong> — using life or critical illness insurance to fund a buyout if a partner dies or becomes disabled</li>
+        <li><strong>Shareholder insurance planning</strong> — structuring coverage to protect ownership continuity</li>
+        <li><strong>Corporate-owned life insurance</strong> — tax-efficient wealth accumulation inside your corporation</li>
+        <li><strong>Succession planning</strong> — preparing for a business transfer to family, partners, or a third party</li>
+        <li><strong>Group benefits</strong> — attracting and retaining top talent with competitive health and dental benefits</li>
+      </ul>
+      <div class="who-row">
+        <span class="who-label">Ideal for:</span>
+        <span class="who-tag">Incorporated professionals</span>
+        <span class="who-tag">Small business owners</span>
+        <span class="who-tag">Partnerships</span>
+        <span class="who-tag">Family businesses</span>
+      </div>
+    </div>
+    <div class="svc-card-stack">
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e6f4ee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 17V9l7-6 7 6v8" stroke="#1D9E75" stroke-width="1.5"/><rect x="7" y="12" width="6" height="5" rx="1" stroke="#1D9E75" stroke-width="1.5"/></svg></div>
+        <div><h4>Key person insurance</h4><p>If a vital person can't work, this coverage keeps your business financially stable.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#faf3e0;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="7" cy="9" r="3" stroke="#C9A84C" stroke-width="1.5"/><circle cx="13" cy="9" r="3" stroke="#C9A84C" stroke-width="1.5"/><path d="M1 17c0-3 2.5-5 6-5M13 13c3.5 0 6 2 6 5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h4>Buy-sell agreement funding</h4><p>Ensuring business continuity if a shareholder passes or becomes disabled.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e8f0f6;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><polyline points="2,15 6,9 10,12 16,5" stroke="#0D3350" stroke-width="1.5" fill="none"/></svg></div>
+        <div><h4>Corporate-owned life insurance</h4><p>Build tax-sheltered wealth inside your corporation with permanent life insurance.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#f5eaee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5l5 5-5 5" stroke="#993556" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h4>Succession planning</h4><p>A clear plan for transitioning your business on your own terms, to the right people.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="svc-divider">
+
+<!-- ── 4. INVESTMENTS ── -->
+<section class="svc-section alt" id="investments">
+  <div class="svc-header">
+    <div class="svc-number">04</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">Growing your wealth</span>
+      <h2>Investment planning</h2>
+      <p>Carrie helps you put your money to work through Sun Life mutual fund solutions — selecting the right account types and investment mix for your goals, time horizon, and comfort with risk.</p>
+    </div>
+  </div>
+
+  <!-- Account cards -->
+  <div class="acct-grid" style="margin-bottom:2.5rem;">
+    <div class="acct-card">
+      <div class="acct-abbr">TFSA</div>
+      <div class="acct-full">Tax-Free Savings Account</div>
+      <p>Grow and withdraw money completely tax-free. Ideal for short or long-term goals — from emergency funds to retirement savings.</p>
+      <span class="acct-badge" style="background:#e6f4ee;color:var(--green);">Tax-free growth</span>
+    </div>
+    <div class="acct-card">
+      <div class="acct-abbr">RRSP</div>
+      <div class="acct-full">Registered Retirement Savings Plan</div>
+      <p>Contributions are tax-deductible today, and investments grow tax-sheltered — one of the most powerful tools for retirement savings in Canada.</p>
+      <span class="acct-badge" style="background:#e8f0f6;color:var(--navy);">Tax-deferred growth</span>
+    </div>
+    <div class="acct-card">
+      <div class="acct-abbr">RESP</div>
+      <div class="acct-full">Registered Education Savings Plan</div>
+      <p>Save for your child's post-secondary education with government matching grants (CESG) up to $7,200 per child.</p>
+      <span class="acct-badge" style="background:#faf3e0;color:var(--tan);">Government grants</span>
+    </div>
+    <div class="acct-card">
+      <div class="acct-abbr">Non-Reg</div>
+      <div class="acct-full">Non-Registered Account</div>
+      <p>No contribution limits — ideal for investing beyond your registered account room, with flexible access at any time.</p>
+      <span class="acct-badge" style="background:#f5eaee;color:var(--rose);">Flexible access</span>
+    </div>
+  </div>
+
+  <!-- Comparison table -->
+  <p style="font-size:14px;color:var(--text-mid);font-weight:300;margin-bottom:1rem;">Carrie helps you decide which accounts to prioritize — and in what order — to minimize taxes and maximize long-term growth.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Tax deduction on contribution</th>
+          <th>Tax-free growth</th>
+          <th>Tax-free withdrawals</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TFSA</td>
+          <td>—</td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td>Short &amp; long-term flexibility</td>
+        </tr>
+        <tr>
+          <td>RRSP</td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td>—</td>
+          <td>Peak earning years, retirement income</td>
+        </tr>
+        <tr>
+          <td>RESP</td>
+          <td>—</td>
+          <td><span class="tick">✓</span></td>
+          <td>Taxed in student's hands</td>
+          <td>Children's education</td>
+        </tr>
+        <tr>
+          <td>Non-registered</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Overflow investing, no limits</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="who-row" style="margin-top:1.5rem;">
+    <span class="who-label">Ideal for:</span>
+    <span class="who-tag">First-time investors</span>
+    <span class="who-tag">Parents saving for education</span>
+    <span class="who-tag">High earners</span>
+    <span class="who-tag">Anyone with unused TFSA room</span>
+  </div>
+</section>
+
+<hr class="svc-divider">
+
+<!-- ── 5. LIFE INSURANCE ── -->
+<section class="svc-section" id="insurance">
+  <div class="svc-header">
+    <div class="svc-number">05</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">Protecting your family</span>
+      <h2>Life insurance</h2>
+      <p>Life insurance is the foundation of any solid financial plan. Carrie helps you choose the right type and amount of coverage to protect your family — whether you need affordable short-term protection or lifelong guaranteed coverage with lasting value.</p>
+    </div>
+  </div>
+  <div class="ins-grid">
+    <div class="ins-card gold">
+      <span class="badge" style="background:#faf3e0;color:var(--tan);">Most popular</span>
+      <h3>Term life insurance</h3>
+      <p>Affordable protection for a set period — 10, 20, or 30 years. Ideal for young families, mortgage coverage, and income replacement during your working years.</p>
+      <ul class="ins-features">
+        <li>Lower premiums, high coverage amounts</li>
+        <li>Coverage when your family needs it most</li>
+        <li>Convertible to permanent insurance</li>
+        <li>Ideal for mortgage and income replacement</li>
+      </ul>
+    </div>
+    <div class="ins-card navy">
+      <span class="badge" style="background:#e8f0f6;color:var(--navy);">Sun Life signature</span>
+      <h3>Sun Life Par insurance</h3>
+      <p>A participating whole life policy that provides permanent, guaranteed coverage while building cash value and paying annual dividends — a powerful wealth-building and estate tool.</p>
+      <ul class="ins-features">
+        <li>Guaranteed lifetime coverage</li>
+        <li>Annual dividend participation</li>
+        <li>Growing tax-sheltered cash value</li>
+        <li>Ideal for estate planning &amp; wealth transfer</li>
+      </ul>
+    </div>
+    <div class="ins-card rose">
+      <span class="badge" style="background:#f5eaee;color:var(--rose);">Flexible</span>
+      <h3>Universal life insurance</h3>
+      <p>Permanent coverage combined with an investment component — giving you flexibility to adjust premiums and grow a tax-sheltered investment account inside your policy.</p>
+      <ul class="ins-features">
+        <li>Flexible premium structure</li>
+        <li>Tax-sheltered investment growth</li>
+        <li>Adjustable coverage over time</li>
+        <li>Ideal for business owners and high earners</li>
+      </ul>
+    </div>
+  </div>
+  <div class="who-row" style="margin-top:1.5rem;">
+    <span class="who-label">Ideal for:</span>
+    <span class="who-tag">Young families</span>
+    <span class="who-tag">Mortgage holders</span>
+    <span class="who-tag">Business owners</span>
+    <span class="who-tag">Estate planning</span>
+    <span class="who-tag">Anyone without coverage</span>
+  </div>
+</section>
+
+<hr class="svc-divider">
+
+<!-- ── 6. CRITICAL ILLNESS ── -->
+<section class="svc-section alt" id="critical">
+  <div class="svc-header">
+    <div class="svc-number">06</div>
+    <div class="svc-header-right">
+      <span class="eyebrow">Protecting your income</span>
+      <h2>Critical illness insurance</h2>
+      <p>A serious illness diagnosis can derail even the best financial plan. Critical illness insurance provides a tax-free lump-sum payment so you can focus entirely on recovery — without worrying about money.</p>
+    </div>
+  </div>
+  <div class="svc-body flip">
+    <div class="svc-detail">
+      <p>Critical illness insurance pays out a lump-sum benefit if you are diagnosed with one of the covered conditions — such as cancer, heart attack, or stroke. You receive the money tax-free, to use however you choose: replacing lost income, covering medical costs, or paying off debt.</p>
+      <p><strong>Why it matters:</strong> 1 in 2 Canadians will be diagnosed with cancer in their lifetime. Without critical illness coverage, a serious diagnosis can force families to drain savings, take on debt, or liquidate investments at the worst possible time.</p>
+      <p><strong>Covered conditions typically include:</strong></p>
+      <ul class="bullet-list">
+        <li>Cancer (life-threatening)</li>
+        <li>Heart attack and stroke</li>
+        <li>Coronary artery bypass surgery</li>
+        <li>Kidney failure, organ transplants</li>
+        <li>Multiple sclerosis, Parkinson's disease</li>
+        <li>And 20+ additional conditions depending on your policy</li>
+      </ul>
+      <div class="who-row">
+        <span class="who-label">Ideal for:</span>
+        <span class="who-tag">Working adults (30s–50s)</span>
+        <span class="who-tag">Self-employed individuals</span>
+        <span class="who-tag">Business owners</span>
+        <span class="who-tag">Anyone with a mortgage</span>
+      </div>
+    </div>
+    <div class="svc-card-stack">
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#f5eaee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 3c-4.5 0-7 3-7 6 0 2 1 3.5 2.5 4.5L5 17h10l-.5-3.5C16 12.5 17 11 17 9c0-3-2.5-6-7-6z" stroke="#993556" stroke-width="1.5"/></svg></div>
+        <div><h4>Tax-free lump-sum payout</h4><p>Use the benefit however you need — no restrictions on how it's spent.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e6f4ee;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#1D9E75" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h4>Income replacement</h4><p>Covers lost income while you take time away from work to recover.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#e8f0f6;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 5v5c0 4-4 7-8 8-4-1-8-4-8-8V7l8-5z" stroke="#0D3350" stroke-width="1.5"/></svg></div>
+        <div><h4>Savings protection</h4><p>Avoid draining your RRSP, TFSA, or investments to cover medical costs.</p></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon" style="background:#faf3e0;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6 10h8M10 6v8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div><h4>Return of premium option</h4><p>Some policies return all premiums paid if you never make a claim — your money back, guaranteed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div>
+    <h2>Not sure where to start?</h2>
+    <p>Carrie will help you identify which services matter most for your situation — no pressure, just clarity.</p>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+    <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">Book a free consultation</a>
+    <a href="contact.html" class="btn-outline-navy">Send a message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Sun Life Advisor</div>
+      <p>Helping families and business owners in Ontario and Saskatchewan build wealth, protect what matters, and plan with confidence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#retirement">Retirement planning</a></li>
+        <li><a href="#estate">Estate planning</a></li>
+        <li><a href="#business">Business solutions</a></li>
+        <li><a href="#investments">Investments</a></li>
+        <li><a href="#insurance">Life insurance</a></li>
+        <li><a href="#critical">Critical illness</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="insights.html">Insights &amp; tips</a></li>
+        <li><a href="market.html">Market information</a></li>
+        <li><a href="about.html">About Carrie</a></li>
+        <li><a href="https://advisor.sunlife.ca/carrie.wang/" target="_blank">Sun Life profile</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a></li>
+        <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+        <li><a href="tel:6475008885">(647) 500-8885</a></li>
+        <li><a href="contact.html">5775 Yonge St, Suite 1900</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Advisors conduct insurance business through Sun Life Financial Distributors (Canada) Inc.</p>
+    <div class="footer-sun"><div class="sun-dot"></div><span>Sun Life Financial</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

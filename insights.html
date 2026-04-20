@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights & Financial Tips | Seven Lakes Financial Services Inc. | Sun Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D3350;
+    --navy-mid: #1a4a6b;
+    --gold: #C9A84C;
+    --gold-light: #e8c96a;
+    --gold-pale: #faf4e4;
+    --tan: #b5956a;
+    --cream: #fdfaf5;
+    --white: #ffffff;
+    --text-dark: #1a2a35;
+    --text-mid: #4a6070;
+    --text-light: #8aa0b0;
+    --border: rgba(13,51,80,0.1);
+    --green: #1D9E75;
+    --rose: #993556;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 68px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-sun { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .logo-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+  .logo-text { line-height: 1.2; }
+  .logo-text strong { display: block; color: #fff; font-size: 14px; font-weight: 500; }
+  .logo-text span { color: var(--gold); font-size: 11px; letter-spacing: 0.4px; }
+  .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  .nav-links a.active { color: #fff; }
+  .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(201,168,76,0.05); pointer-events: none; }
+  .page-hero::after  { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 60px; background: var(--cream); border-radius: 40px 40px 0 0; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; position: relative; z-index: 1; }
+  .breadcrumb a { color: rgba(255,255,255,0.4); font-size: 12px; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span { color: rgba(255,255,255,0.2); font-size: 12px; }
+  .breadcrumb strong { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 400; }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: end; }
+  .eyebrow { display: inline-block; color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 50px; font-weight: 500; color: #fff; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { color: rgba(255,255,255,0.55); font-size: 17px; line-height: 1.7; font-weight: 300; max-width: 560px; margin-bottom: 28px; }
+
+  /* Search bar */
+  .search-wrap { display: flex; gap: 8px; max-width: 500px; }
+  .search-input { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 11px 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 9px; background: rgba(255,255,255,0.08); color: #fff; outline: none; transition: border-color 0.2s; }
+  .search-input::placeholder { color: rgba(255,255,255,0.35); }
+  .search-input:focus { border-color: var(--gold); }
+  .search-btn { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 11px 20px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .search-btn:hover { background: var(--gold-light); }
+
+  /* Author panel */
+  .hero-author-panel { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 24px; }
+  .author-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .author-ava { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(201,168,76,0.4); flex-shrink: 0; background: var(--gold); }
+  .author-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .author-info h4 { color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .author-info p  { color: rgba(255,255,255,0.45); font-size: 12px; line-height: 1.4; }
+  .author-creds { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
+  .acred { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 10.5px; padding: 3px 9px; border-radius: 20px; }
+  .author-panel-desc { color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .author-btn { display: block; text-align: center; background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
+  .author-btn:hover { background: var(--gold-light); }
+
+  /* ── CATEGORY CARDS ── */
+  .categories { padding: 4rem 3rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.3px; }
+  .section-desc { color: var(--text-mid); font-size: 15px; font-weight: 300; margin-bottom: 2rem; }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cat-card { border-radius: var(--radius-lg); padding: 28px 26px; text-decoration: none; display: block; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+  .cat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  .cat-card::before { content: ''; position: absolute; bottom: -30px; right: -30px; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+  .cat-emoji { font-size: 28px; margin-bottom: 14px; display: block; }
+  .cat-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+  .cat-card p { font-size: 13.5px; line-height: 1.65; font-weight: 300; opacity: 0.8; margin-bottom: 16px; }
+  .cat-meta { display: flex; align-items: center; justify-content: space-between; }
+  .cat-count { font-size: 12px; font-weight: 400; opacity: 0.65; }
+  .cat-arrow { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.15); display: grid; place-items: center; transition: background 0.2s; }
+  .cat-card:hover .cat-arrow { background: rgba(255,255,255,0.25); }
+
+  /* ── FEATURED ARTICLE ── */
+  .featured-wrap { padding: 0 3rem 4rem; }
+  .featured-article { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; transition: border-color 0.2s; }
+  .featured-article:hover { border-color: rgba(13,51,80,0.2); }
+  .feat-img { background: linear-gradient(135deg, #0D3350, #1a4a6b 60%, #0a2840); min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; padding: 30px; position: relative; overflow: hidden; }
+  .feat-img::after { content: ''; position: absolute; bottom: -50px; right: -50px; width: 220px; height: 220px; border-radius: 50%; background: rgba(201,168,76,0.07); }
+  .feat-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; width: fit-content; }
+  .feat-big-num { font-family: 'Playfair Display', serif; font-size: 100px; font-weight: 600; color: rgba(255,255,255,0.04); line-height: 1; position: absolute; bottom: 10px; right: 14px; }
+  .feat-body { padding: 36px 34px; display: flex; flex-direction: column; justify-content: center; }
+  .feat-eyebrow { font-size: 11px; font-weight: 500; color: var(--gold); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
+  .feat-body h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--navy); line-height: 1.35; margin-bottom: 12px; letter-spacing: -0.2px; }
+  .feat-body p { font-size: 14.5px; color: var(--text-mid); line-height: 1.75; font-weight: 300; margin-bottom: 22px; }
+  .feat-meta { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-light); margin-bottom: 22px; }
+  .feat-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+  .read-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 13.5px; font-weight: 500; padding: 11px 22px; border-radius: 9px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; width: fit-content; }
+  .read-btn:hover { background: var(--navy-mid); }
+  .read-btn svg { transition: transform 0.2s; }
+  .read-btn:hover svg { transform: translateX(3px); }
+
+  /* ── LATEST ARTICLES ── */
+  .latest-wrap { padding: 0 3rem 5rem; }
+  .latest-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .latest-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; color: var(--navy); letter-spacing: -0.3px; }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn { background: var(--white); border: 1px solid var(--border); color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-size: 12.5px; padding: 6px 14px; border-radius: 30px; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 2.5rem; }
+  .art-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s, border-color 0.2s; text-decoration: none; display: block; }
+  .art-card:hover { transform: translateY(-4px); border-color: rgba(13,51,80,0.18); }
+  .art-thumb { height: 170px; display: flex; align-items: flex-end; padding: 14px; position: relative; overflow: hidden; }
+  .art-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.3)); }
+  .art-cat-tag { font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 20px; position: relative; z-index: 1; }
+  .art-body { padding: 20px 22px 22px; }
+  .art-body h3 { font-family: 'Playfair Display', serif; font-size: 16.5px; font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 8px; }
+  .art-body p { font-size: 13px; color: var(--text-mid); line-height: 1.65; font-weight: 300; margin-bottom: 14px; }
+  .art-footer { display: flex; align-items: center; justify-content: space-between; }
+  .art-meta-sm { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-light); }
+  .art-meta-sm .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+  .art-read-link { font-size: 12.5px; font-weight: 500; color: var(--navy); display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .art-card:hover .art-read-link { gap: 7px; }
+
+  /* Load more */
+  .load-more-wrap { text-align: center; }
+  .load-more-btn { background: transparent; border: 1.5px solid var(--border); color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; padding: 12px 32px; border-radius: 9px; cursor: pointer; transition: all 0.2s; }
+  .load-more-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* ── NEWSLETTER STRIP ── */
+  .newsletter { background: var(--navy); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .nl-left h2 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 500; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .nl-left p  { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.7; font-weight: 300; }
+  .nl-form { display: flex; flex-direction: column; gap: 10px; }
+  .nl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nl-input { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 9px; background: rgba(255,255,255,0.07); color: #fff; outline: none; transition: border-color 0.2s; }
+  .nl-input::placeholder { color: rgba(255,255,255,0.3); }
+  .nl-input:focus { border-color: var(--gold); }
+  .nl-btn { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px; border-radius: 9px; border: none; cursor: pointer; transition: background 0.2s; }
+  .nl-btn:hover { background: var(--gold-light); }
+  .nl-note { color: rgba(255,255,255,0.3); font-size: 12px; }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: var(--gold); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .cta-band p { color: rgba(13,51,80,0.65); font-size: 15px; font-weight: 300; }
+  .btn-navy { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-navy:hover { background: var(--navy-mid); }
+
+  /* ── FOOTER ── */
+  footer { background: #091f30; padding: 3rem; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand strong { display: block; color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .footer-brand .sub { color: var(--gold); font-size: 11.5px; }
+  .footer-brand p { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.65; margin-top: 12px; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .footer-sun { display: flex; align-items: center; gap: 8px; }
+  .sun-dot { width: 22px; height: 22px; background: var(--gold); border-radius: 50%; }
+  .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .cat-card { animation: fadeUp 0.5s ease both; }
+  .cat-card:nth-child(1) { animation-delay: 0.05s; }
+  .cat-card:nth-child(2) { animation-delay: 0.12s; }
+  .cat-card:nth-child(3) { animation-delay: 0.19s; }
+  .cat-card:nth-child(4) { animation-delay: 0.26s; }
+  .cat-card:nth-child(5) { animation-delay: 0.33s; }
+  .cat-card:nth-child(6) { animation-delay: 0.40s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+    .articles-grid { grid-template-columns: 1fr 1fr; }
+    .featured-article { grid-template-columns: 1fr; }
+    .feat-img { min-height: 200px; }
+    .newsletter { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 3.5rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-author-panel { display: none; }
+    .categories, .featured-wrap, .latest-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .newsletter { padding: 3rem 1.5rem; }
+    .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .latest-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+  @media (max-width: 640px) {
+    .page-hero h1 { font-size: 36px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .nl-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-sun">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="4.5" fill="#0D3350"/>
+        <line x1="10" y1="1.5" x2="10" y2="4"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="10" y1="16" x2="10" y2="18.5"  stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="1.5" y1="10" x2="4"  y2="10"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="16"  y1="10" x2="18.5" y2="10" stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="3.9" y1="3.9"   x2="5.7"  y2="5.7"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="14.3" y1="14.3" x2="16.1" y2="16.1"  stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="16.1" y1="3.9"  x2="14.3" y2="5.7"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="5.7"  y1="14.3" x2="3.9"  y2="16.1"  stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-divider"></div>
+    <div class="logo-text">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <span>Sun Life &nbsp;·&nbsp; Carrie Wang, CEA, CLU®</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="insights.html" class="active">Insights</a></li>
+    <li><a href="market.html">Market</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>›</span><strong>Insights</strong>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Knowledge hub</span>
+      <h1>Financial insights<br><em>from Carrie Wang</em></h1>
+      <p class="hero-sub">Clear, practical guidance on retirement, investments, insurance, estate planning, and more — written in plain language to help you make better financial decisions.</p>
+      <div class="search-wrap">
+        <input class="search-input" type="text" placeholder="Search articles — e.g. RRSP, life insurance, CPP…">
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+    <div class="hero-author-panel">
+      <div class="author-row">
+        <div class="author-ava">
+          <img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="Carrie Wang" onerror="this.style.display='none';">
+        </div>
+        <div class="author-info">
+          <h4>Carrie Wang</h4>
+          <p>Financial Planner<br>Seven Lakes Financial</p>
+        </div>
+      </div>
+      <div class="author-creds">
+        <span class="acred">CEA</span>
+        <span class="acred">CLU®</span>
+        <span class="acred">MDRT</span>
+        <span class="acred">Sun Life</span>
+      </div>
+      <p class="author-panel-desc">Carrie shares insights from years of experience helping families and business owners across Ontario and Saskatchewan build lasting financial security.</p>
+      <a href="about.html" class="author-btn">Learn about Carrie →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <span class="eyebrow">Browse by topic</span>
+  <h2 class="section-title" style="margin-top:6px;">Choose a topic that matters to you</h2>
+  <p class="section-desc">Each section is written by Carrie to help you understand your options and make confident financial decisions.</p>
+
+  <div class="cat-grid">
+
+    <!-- Retirement -->
+    <a href="insights-retirement.html" class="cat-card" style="background:var(--navy); color:#fff;">
+      <span class="cat-emoji">🕐</span>
+      <h3 style="color:#fff;">Retirement planning</h3>
+      <p style="color:rgba(255,255,255,0.6);">RRSP strategies, CPP timing, income projections, and everything you need to retire with confidence.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:rgba(255,255,255,0.45);">8 articles</span>
+        <div class="cat-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Investing -->
+    <a href="#" class="cat-card" style="background:var(--gold-pale); color:var(--navy); border:1px solid rgba(201,168,76,0.3);">
+      <span class="cat-emoji">📈</span>
+      <h3>Investment planning</h3>
+      <p style="color:var(--text-mid);">TFSA, RRSP, RESP, non-registered accounts, and Sun Life mutual fund strategies explained clearly.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:var(--text-light);">6 articles</span>
+        <div class="cat-arrow" style="background:rgba(13,51,80,0.08);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Insurance -->
+    <a href="#" class="cat-card" style="background:#f5eaee; color:var(--navy); border:1px solid rgba(153,53,86,0.15);">
+      <span class="cat-emoji">🛡️</span>
+      <h3>Life &amp; critical illness insurance</h3>
+      <p style="color:var(--text-mid);">Term life, Sun Life Par, critical illness coverage — how to choose the right protection for your family.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:var(--text-light);">5 articles</span>
+        <div class="cat-arrow" style="background:rgba(153,53,86,0.1);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#993556" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Estate -->
+    <a href="#" class="cat-card" style="background:#e8f0f6; color:var(--navy); border:1px solid rgba(13,51,80,0.12);">
+      <span class="cat-emoji">🏛️</span>
+      <h3>Estate planning</h3>
+      <p style="color:var(--text-mid);">Protecting your legacy, choosing beneficiaries, executor duties, and wealth transfer strategies.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:var(--text-light);">4 articles</span>
+        <div class="cat-arrow" style="background:rgba(13,51,80,0.08);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Business -->
+    <a href="#" class="cat-card" style="background:#e6f4ee; color:var(--navy); border:1px solid rgba(29,158,117,0.2);">
+      <span class="cat-emoji">🏢</span>
+      <h3>Business owner solutions</h3>
+      <p style="color:var(--text-mid);">Key person insurance, buy-sell agreements, corporate life insurance, and succession planning.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:var(--text-light);">4 articles</span>
+        <div class="cat-arrow" style="background:rgba(29,158,117,0.1);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Tax tips -->
+    <a href="#" class="cat-card" style="background:#fdfaf5; color:var(--navy); border:1px solid var(--border);">
+      <span class="cat-emoji">💡</span>
+      <h3>Tax tips &amp; strategies</h3>
+      <p style="color:var(--text-mid);">How to reduce your tax burden through smart account use, income splitting, and charitable giving.</p>
+      <div class="cat-meta">
+        <span class="cat-count" style="color:var(--text-light);">3 articles</span>
+        <div class="cat-arrow" style="background:rgba(13,51,80,0.06);">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FEATURED ARTICLE -->
+<div class="featured-wrap">
+  <span class="eyebrow">Featured article</span>
+  <h2 class="section-title" style="margin-top:6px; margin-bottom:1.25rem;">Editor's pick</h2>
+  <div class="featured-article">
+    <div class="feat-img">
+      <span class="feat-tag">
+        🕐 Retirement
+      </span>
+      <div class="feat-big-num">01</div>
+    </div>
+    <div class="feat-body">
+      <div class="feat-eyebrow">Retirement fundamentals</div>
+      <h2>How much do you really need to retire comfortably in Canada?</h2>
+      <p>The "70% rule" is popular — but it's not right for everyone. Carrie breaks down how to calculate your personal retirement income target, what to count on from CPP and OAS, and how to close the gap with your own savings.</p>
+      <div class="feat-meta">
+        <span>Carrie Wang, CLU®</span>
+        <div class="dot"></div>
+        <span>8 min read</span>
+        <div class="dot"></div>
+        <span>Retirement planning</span>
+      </div>
+      <a href="insights-retirement.html#article-1" class="read-btn">
+        Read full article
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- LATEST ARTICLES -->
+<section class="latest-wrap">
+  <div class="latest-header">
+    <div>
+      <span class="eyebrow">All articles</span>
+      <h2>Latest from Carrie</h2>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterArticles('all', this)">All topics</button>
+      <button class="filter-btn" onclick="filterArticles('retirement', this)">Retirement</button>
+      <button class="filter-btn" onclick="filterArticles('investing', this)">Investing</button>
+      <button class="filter-btn" onclick="filterArticles('insurance', this)">Insurance</button>
+      <button class="filter-btn" onclick="filterArticles('estate', this)">Estate</button>
+      <button class="filter-btn" onclick="filterArticles('business', this)">Business</button>
+    </div>
+  </div>
+
+  <div class="articles-grid" id="articles-grid">
+
+    <!-- 1 -->
+    <a href="insights-retirement.html#article-1" class="art-card" data-cat="retirement">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#0D3350,#1a4a6b);">
+        <span class="art-cat-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Retirement</span>
+      </div>
+      <div class="art-body">
+        <h3>How much do you really need to retire comfortably in Canada?</h3>
+        <p>A practical breakdown of your retirement income target, CPP/OAS reality, and how to bridge the gap.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>8 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 2 -->
+    <a href="insights-retirement.html#article-2" class="art-card" data-cat="investing">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#b5956a,#C9A84C);">
+        <span class="art-cat-tag" style="background:rgba(13,51,80,0.85);color:#fff;">Investing</span>
+      </div>
+      <div class="art-body">
+        <h3>RRSP vs TFSA: Which should you prioritize in your 40s and 50s?</h3>
+        <p>Understanding when each account wins — and how to use both together for maximum tax advantage.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>5 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 3 -->
+    <a href="insights-retirement.html#article-3" class="art-card" data-cat="retirement">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#C9A84C,#e8c96a);">
+        <span class="art-cat-tag" style="background:rgba(13,51,80,0.85);color:#fff;">Retirement</span>
+      </div>
+      <div class="art-body">
+        <h3>When should you start CPP? The answer might surprise you</h3>
+        <p>Starting at 60 vs 70 could mean hundreds of thousands of dollars difference. Here's how to decide.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>6 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 4 -->
+    <a href="#" class="art-card" data-cat="insurance">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#993556,#6b1f3a);">
+        <span class="art-cat-tag" style="background:rgba(255,255,255,0.9);color:#993556;">Insurance</span>
+      </div>
+      <div class="art-body">
+        <h3>Why critical illness insurance matters more than most Canadians realize</h3>
+        <p>1 in 2 Canadians will be diagnosed with cancer. Here's how a lump-sum benefit protects your financial plan.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>6 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 5 -->
+    <a href="#" class="art-card" data-cat="estate">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#1a4a6b,#0D3350);">
+        <span class="art-cat-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Estate planning</span>
+      </div>
+      <div class="art-body">
+        <h3>5 estate planning mistakes Canadian families make — and how to avoid them</h3>
+        <p>From outdated beneficiary designations to unprepared executors — common oversights that can cause real problems.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>7 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 6 -->
+    <a href="#" class="art-card" data-cat="business">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#1D9E75,#0e6b4f);">
+        <span class="art-cat-tag" style="background:rgba(255,255,255,0.9);color:#0e6b4f;">Business</span>
+      </div>
+      <div class="art-body">
+        <h3>What happens to your business if you can't work? A guide for Canadian business owners</h3>
+        <p>Key person insurance, disability coverage, and succession planning — the protection plan most owners skip.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>5 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 7 -->
+    <a href="#" class="art-card" data-cat="retirement">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#2a6090,#0D3350);">
+        <span class="art-cat-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Retirement</span>
+      </div>
+      <div class="art-body">
+        <h3>The RRSP drawdown trap: how to avoid a big tax bill in retirement</h3>
+        <p>Many Canadians don't realize how heavily their RRSP withdrawals will be taxed. Here's how to plan smarter.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>7 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 8 -->
+    <a href="#" class="art-card" data-cat="investing">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#b5956a,#8c6a3f);">
+        <span class="art-cat-tag" style="background:rgba(255,255,255,0.9);color:#8c6a3f;">Investing</span>
+      </div>
+      <div class="art-body">
+        <h3>RESP explained: how to maximize government grants for your child's education</h3>
+        <p>The Canada Education Savings Grant gives you $7,200 per child. Most families leave money on the table.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>5 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 9 -->
+    <a href="#" class="art-card" data-cat="insurance">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#7a2848,#993556);">
+        <span class="art-cat-tag" style="background:rgba(255,255,255,0.9);color:#993556;">Insurance</span>
+      </div>
+      <div class="art-body">
+        <h3>Term life vs. Sun Life Par: which type of life insurance is right for your family?</h3>
+        <p>A clear, jargon-free comparison of your options — with guidance on which makes sense for your stage of life.</p>
+        <div class="art-footer">
+          <div class="art-meta-sm"><span>Carrie Wang</span><div class="dot"></div><span>6 min</span></div>
+          <span class="art-read-link">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="load-more-wrap">
+    <button class="load-more-btn">Load more articles</button>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="nl-left">
+    <span class="eyebrow">Stay informed</span>
+    <h2>Get Carrie's monthly financial tips</h2>
+    <p>Practical insights on retirement, investing, insurance, and tax strategies — delivered to your inbox once a month. No spam. Just clear, actionable advice from a trusted advisor.</p>
+  </div>
+  <div class="nl-form">
+    <div class="nl-row">
+      <input class="nl-input" type="text" placeholder="First name">
+      <input class="nl-input" type="text" placeholder="Last name">
+    </div>
+    <input class="nl-input" type="email" placeholder="Your email address">
+    <select class="nl-input" style="cursor:pointer;">
+      <option value="" disabled selected>Topics I'm most interested in…</option>
+      <option>Retirement planning</option>
+      <option>Investments (RRSP / TFSA / RESP)</option>
+      <option>Life &amp; critical illness insurance</option>
+      <option>Estate planning</option>
+      <option>Business owner strategies</option>
+      <option>Tax tips</option>
+      <option>All of the above</option>
+    </select>
+    <button class="nl-btn" onclick="this.textContent='✓ You\'re subscribed! Thank you.'; this.style.background='#1D9E75'; this.style.color='#fff';">Subscribe — it's free</button>
+    <p class="nl-note">By subscribing you agree to receive emails from Seven Lakes Financial Services Inc. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div>
+    <h2>Have a specific financial question?</h2>
+    <p>Book a free, no-obligation conversation with Carrie — she'll give you straight answers, not sales pitches.</p>
+  </div>
+  <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">Book a free consultation</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Sun Life Advisor</div>
+      <p>Helping families and business owners in Ontario and Saskatchewan build wealth, protect what matters, and plan with confidence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#retirement">Retirement planning</a></li>
+        <li><a href="services.html#estate">Estate planning</a></li>
+        <li><a href="services.html#business">Business solutions</a></li>
+        <li><a href="services.html#investments">Investments</a></li>
+        <li><a href="services.html#insurance">Life insurance</a></li>
+        <li><a href="services.html#critical">Critical illness</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Insights</h4>
+      <ul>
+        <li><a href="insights-retirement.html">Retirement</a></li>
+        <li><a href="#">Investing</a></li>
+        <li><a href="#">Insurance</a></li>
+        <li><a href="#">Estate planning</a></li>
+        <li><a href="#">Business</a></li>
+        <li><a href="#">Tax tips</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a></li>
+        <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+        <li><a href="tel:6475008885">(647) 500-8885</a></li>
+        <li><a href="contact.html">5775 Yonge St, Suite 1900</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Advisors conduct insurance business through Sun Life Financial Distributors (Canada) Inc.</p>
+    <div class="footer-sun"><div class="sun-dot"></div><span>Sun Life Financial</span></div>
+  </div>
+</footer>
+
+<script>
+  function filterArticles(cat, btn) {
+    // update buttons
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // filter cards
+    document.querySelectorAll('.art-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = 'block';
+        card.style.animation = 'none';
+        requestAnimationFrame(() => {
+          card.style.animation = 'fadeUp 0.35s ease both';
+        });
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
