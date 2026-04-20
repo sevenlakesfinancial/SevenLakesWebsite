@@ -28,18 +28,14 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
 
-  /* ── NAV ── */
-  nav { position: sticky; top: 0; z-index: 100; background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 68px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .logo-sun { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
-  .logo-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
-  .logo-text { line-height: 1.2; }
-  .logo-text strong { display: block; color: #fff; font-size: 14px; font-weight: 500; }
-  .logo-text span { color: var(--gold); font-size: 11px; letter-spacing: 0.4px; }
+    /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--cream); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 70px; border-bottom: 1px solid rgba(13,51,80,0.1); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 100%; }
+  .nav-logo img { height: 50px; width: auto; display: block; }
   .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
-  .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-  .nav-links a.active { color: #fff; }
+  .nav-links a { color: var(--text-dark); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--navy); background: rgba(13, 51, 80, 0.05); }
+  .nav-links a.active { color: var(--navy); font-weight: 500; }
   .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
   .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
@@ -159,10 +155,10 @@
   .footer-col ul li { margin-bottom: 9px; }
   .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
   .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
   .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
-  .footer-sun { display: flex; align-items: center; gap: 8px; }
-  .sun-dot { width: 22px; height: 22px; background: var(--gold); border-radius: 50%; }
+  .footer-sun { display: flex; align-items: center; gap: 10px; }
+  .footer-icon { width: 24px; height: auto; display: block; }
   .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
 
   /* ── RESPONSIVE ── */
@@ -185,6 +181,7 @@
     .svc-number { display: none; }
   }
   @media (max-width: 600px) {
+    .nav-logo img { height: 38px !important; }
     .page-hero h1 { font-size: 36px; }
     .ins-grid, .acct-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; }
@@ -196,24 +193,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html">
-    <div class="logo-sun">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="4.5" fill="#0D3350"/>
-        <line x1="10" y1="1.5" x2="10" y2="4"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="10" y1="16" x2="10" y2="18.5"  stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="1.5" y1="10" x2="4"  y2="10"   stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="16"  y1="10" x2="18.5" y2="10" stroke="#0D3350" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="3.9" y1="3.9" x2="5.7" y2="5.7"     stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="14.3" y1="14.3" x2="16.1" y2="16.1" stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="16.1" y1="3.9" x2="14.3" y2="5.7"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
-        <line x1="5.7" y1="14.3" x2="3.9" y2="16.1"   stroke="#0D3350" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="logo-divider"></div>
-    <div class="logo-text">
-      <strong>Seven Lakes Financial Services Inc.</strong>
-      <span>Sun Life &nbsp;·&nbsp; Carrie Wang, CEA, CLU®</span>
-    </div>
+    <img src="LOGO.png" alt="Seven Lakes Financial Services Inc.">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -691,7 +671,10 @@
   </div>
   <div class="footer-bottom">
     <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Advisors conduct insurance business through Sun Life Financial Distributors (Canada) Inc.</p>
-    <div class="footer-sun"><div class="sun-dot"></div><span>Sun Life Financial</span></div>
+        <div class="footer-sun">
+      <img src="ICON.png" alt="Seven Lakes" class="footer-icon">
+      <span>Seven Lakes Financial</span>
+    </div><span>Sun Life Financial</span></div>
   </div>
 </footer>
 

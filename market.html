@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Information | Seven Lakes Financial Services Inc. | Sun Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D3350;
+    --navy-mid: #1a4a6b;
+    --gold: #C9A84C;
+    --gold-light: #e8c96a;
+    --gold-pale: #faf4e4;
+    --tan: #b5956a;
+    --cream: #fdfaf5;
+    --white: #ffffff;
+    --text-dark: #1a2a35;
+    --text-mid: #4a6070;
+    --text-light: #8aa0b0;
+    --border: rgba(13,51,80,0.1);
+    --green: #1D9E75;
+    --green-pale: #e6f4ee;
+    --red: #d94040;
+    --red-pale: #fdeaea;
+    --rose: #993556;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--cream); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 70px; border-bottom: 1px solid rgba(13,51,80,0.1); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 100%; }
+  .nav-logo img { height: 50px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+  .nav-links a { color: var(--text-dark); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--navy); background: rgba(13, 51, 80, 0.05); }
+  .nav-links a.active { color: var(--navy); font-weight: 500; }
+  .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: var(--navy); padding: 4rem 3rem 3.5rem; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 500px; height: 500px; border-radius: 50%; background: rgba(201,168,76,0.05); pointer-events: none; }
+  .page-hero::after  { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 60px; background: var(--cream); border-radius: 40px 40px 0 0; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; position: relative; z-index: 1; }
+  .breadcrumb a { color: rgba(255,255,255,0.4); font-size: 12px; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span { color: rgba(255,255,255,0.2); font-size: 12px; }
+  .breadcrumb strong { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 400; }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  .eyebrow { display: inline-block; color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 500; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.5px; }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { color: rgba(255,255,255,0.55); font-size: 16px; line-height: 1.7; font-weight: 300; max-width: 540px; margin-bottom: 22px; }
+  .hero-disclaimer { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 14px; }
+  .hero-disclaimer svg { flex-shrink: 0; opacity: 0.6; }
+  .hero-disclaimer span { color: rgba(255,255,255,0.45); font-size: 12px; line-height: 1.4; }
+  .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.3); border-radius: 30px; padding: 6px 14px; width: fit-content; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.2)} }
+  .live-badge span { color: var(--green); font-size: 12.5px; font-weight: 500; }
+
+  /* ── TICKER TAPE ── */
+  .ticker-section { background: var(--white); border-bottom: 1px solid var(--border); }
+  .ticker-section .tradingview-widget-container { min-height: 46px; }
+
+  /* ── LAYOUT ── */
+  .main-layout { padding: 3rem 3rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; align-items: start; }
+
+  /* ── SECTION HEADERS ── */
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+  .section-head h2 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: var(--navy); letter-spacing: -0.2px; }
+  .section-head .sub { font-size: 12.5px; color: var(--text-light); font-weight: 300; }
+  .section-block { margin-bottom: 2.5rem; }
+
+  /* ── MARKET CARDS ── */
+  .market-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2.5rem; }
+  .mcard { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; transition: border-color 0.2s, transform 0.2s; }
+  .mcard:hover { transform: translateY(-2px); border-color: rgba(13,51,80,0.18); }
+  .mcard-label { font-size: 11px; font-weight: 500; color: var(--text-light); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .mcard-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .mcard-change { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  .mcard-change.up   { background: var(--green-pale); color: var(--green); }
+  .mcard-change.down { background: var(--red-pale);   color: var(--red); }
+  .mcard-change.flat { background: var(--gold-pale);  color: var(--tan); }
+  .mcard-name { font-size: 11.5px; color: var(--text-light); margin-top: 6px; }
+
+  /* ── TRADINGVIEW WIDGETS ── */
+  .widget-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; }
+  .widget-header { padding: 16px 20px 0; display: flex; align-items: center; justify-content: space-between; }
+  .widget-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: var(--navy); }
+  .widget-header p  { font-size: 12.5px; color: var(--text-light); font-weight: 300; }
+  .widget-body { padding: 0; }
+
+  /* ── EXCHANGE RATE CARDS ── */
+  .fx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fx-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s; }
+  .fx-card:hover { border-color: var(--gold); }
+  .fx-pair { font-size: 13.5px; font-weight: 500; color: var(--navy); }
+  .fx-sub  { font-size: 11.5px; color: var(--text-light); margin-top: 2px; }
+  .fx-rate { text-align: right; }
+  .fx-rate .val  { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); }
+  .fx-rate .chg  { font-size: 12px; font-weight: 500; }
+  .fx-rate .chg.up   { color: var(--green); }
+  .fx-rate .chg.down { color: var(--red); }
+
+  /* ── RATES CARD ── */
+  .rates-table { width: 100%; }
+  .rates-table tr { border-bottom: 1px solid var(--border); }
+  .rates-table tr:last-child { border-bottom: none; }
+  .rates-table td { padding: 13px 0; font-size: 13.5px; }
+  .rates-table td:first-child { color: var(--text-mid); font-weight: 300; }
+  .rates-table td:last-child  { text-align: right; font-weight: 500; color: var(--navy); }
+  .rate-chg { font-size: 11.5px; font-weight: 400; margin-left: 8px; }
+  .rate-chg.up   { color: var(--green); }
+  .rate-chg.down { color: var(--red); }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 88px; }
+  .sb-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; }
+  .sb-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+  .sb-card.navy { background: var(--navy); border-color: transparent; }
+  .sb-card.gold { background: var(--gold); border-color: transparent; }
+  .sb-card.navy h3 { color: #fff; }
+  .sb-card.navy p  { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .sb-card.gold h3 { color: var(--navy); }
+  .sb-card.gold p  { color: rgba(13,51,80,0.65); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+
+  /* Carrie mini */
+  .carrie-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .carrie-ava { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(201,168,76,0.4); flex-shrink: 0; background: var(--gold); }
+  .carrie-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .carrie-name { color: #fff; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .carrie-role { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .sb-btn { display: block; text-align: center; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 10px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+  .sb-btn.gold-btn { background: var(--gold); color: var(--navy); }
+  .sb-btn.gold-btn:hover { background: var(--gold-light); }
+  .sb-btn.navy-btn { background: var(--navy); color: #fff; }
+  .sb-btn.navy-btn:hover { background: var(--navy-mid); }
+  .sb-btn.white-btn { background: #fff; color: var(--navy); }
+  .sb-btn.white-btn:hover { background: #f0f4f8; }
+
+  /* Resource links */
+  .res-list { display: flex; flex-direction: column; gap: 10px; }
+  .res-link { display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px; transition: border-color 0.2s, background 0.2s; }
+  .res-link:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .res-icon { width: 30px; height: 30px; border-radius: 7px; display: grid; place-items: center; flex-shrink: 0; }
+  .res-link h4 { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 1px; }
+  .res-link p  { font-size: 11.5px; color: var(--text-light); font-weight: 300; }
+
+  /* ── ECONOMIC INDICATORS ── */
+  .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .eco-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; transition: border-color 0.2s; }
+  .eco-card:hover { border-color: rgba(13,51,80,0.2); }
+  .eco-title { font-size: 11.5px; color: var(--text-light); font-weight: 400; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .eco-val  { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 4px; line-height: 1; }
+  .eco-note { font-size: 11.5px; color: var(--text-light); font-weight: 300; }
+  .eco-bar  { height: 4px; background: var(--border); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .eco-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+
+  /* ── COMMENTARY ── */
+  .commentary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .commentary-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; transition: border-color 0.2s, transform 0.2s; }
+  .commentary-card:hover { border-color: rgba(13,51,80,0.2); transform: translateY(-2px); }
+  .comm-tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+  .commentary-card h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 8px; }
+  .commentary-card p  { font-size: 13px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+  .comm-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .comm-footer span { font-size: 12px; color: var(--text-light); }
+  .comm-link { font-size: 12.5px; font-weight: 500; color: var(--navy); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .comm-link:hover { gap: 7px; }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-top: 2rem; display: flex; align-items: flex-start; gap: 12px; }
+  .disclaimer-box svg { flex-shrink: 0; margin-top: 2px; opacity: 0.4; }
+  .disclaimer-box p { font-size: 12px; color: var(--text-light); line-height: 1.65; font-weight: 300; }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: var(--gold); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .cta-band p { color: rgba(13,51,80,0.65); font-size: 15px; font-weight: 300; }
+  .btn-navy { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-navy:hover { background: var(--navy-mid); }
+
+  /* ── FOOTER ── */
+  footer { background: #091f30; padding: 3rem; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand strong { display: block; color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .footer-brand .sub { color: var(--gold); font-size: 11.5px; }
+  .footer-brand p { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.65; margin-top: 12px; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .footer-sun { display: flex; align-items: center; gap: 10px; }
+  .footer-icon { width: 24px; height: auto; display: block; }
+  .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .market-cards { grid-template-columns: repeat(2, 1fr); }
+    .main-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; }
+    .commentary-grid { grid-template-columns: 1fr 1fr; }
+    .eco-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 3.5rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .main-layout { padding: 2.5rem 1.5rem 3rem; }
+    .commentary-grid { grid-template-columns: 1fr; }
+    .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .fx-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .page-hero h1 { font-size: 34px; }
+    .market-cards { grid-template-columns: 1fr 1fr; }
+    .eco-grid { grid-template-columns: 1fr; }
+    .sidebar { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .nav-logo img { height: 38px !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="LOGO.png" alt="Seven Lakes Financial Services Inc.">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="market.html" class="active">Market</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>›</span><strong>Market Information</strong>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Live market data</span>
+      <h1>Market <em>information</em><br>&amp; economic overview</h1>
+      <p class="hero-sub">Stay informed with live indices, exchange rates, interest rates, and economic indicators relevant to Canadian investors — updated in real time.</p>
+      <div class="hero-disclaimer">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.4"/><path d="M10 9v5M10 7v.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Market data is for informational purposes only and does not constitute investment advice. Past performance is not indicative of future results.</span>
+      </div>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      <span>Live market data</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER TAPE -->
+<div class="ticker-section">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        {"proName":"TSX:TSX","title":"TSX Composite"},
+        {"proName":"INDEX:SPX","title":"S&P 500"},
+        {"proName":"INDEX:IXIC","title":"NASDAQ"},
+        {"proName":"INDEX:DJI","title":"Dow Jones"},
+        {"proName":"FX_IDC:CADUSD","title":"CAD/USD"},
+        {"proName":"OANDA:XAUUSD","title":"Gold"},
+        {"proName":"TVC:USOIL","title":"Crude Oil"},
+        {"proName":"INDEX:TSX60","title":"S&P/TSX 60"},
+        {"proName":"FX:EURUSD","title":"EUR/USD"},
+        {"proName":"CAPITALCOM:CA10Y","title":"Canada 10Y Bond"}
+      ],
+      "showSymbolLogo": true,
+      "isTransparent": false,
+      "displayMode": "adaptive",
+      "colorTheme": "light",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- LEFT COLUMN -->
+  <div>
+
+    <!-- KEY INDEX CARDS -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Key market indices</h2>
+        <span class="sub">Prices update automatically</span>
+      </div>
+      <div class="market-cards">
+        <div class="mcard">
+          <div class="mcard-label">TSX Composite</div>
+          <div class="mcard-val" id="tsx-val">—</div>
+          <span class="mcard-change flat" id="tsx-chg">Loading…</span>
+          <div class="mcard-name">S&amp;P / TSX Composite Index</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-label">S&amp;P 500</div>
+          <div class="mcard-val" id="sp-val">—</div>
+          <span class="mcard-change flat" id="sp-chg">Loading…</span>
+          <div class="mcard-name">US Large Cap Benchmark</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-label">NASDAQ</div>
+          <div class="mcard-val" id="nas-val">—</div>
+          <span class="mcard-change flat" id="nas-chg">Loading…</span>
+          <div class="mcard-name">US Technology Index</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-label">CAD / USD</div>
+          <div class="mcard-val" id="cad-val">—</div>
+          <span class="mcard-change flat" id="cad-chg">Loading…</span>
+          <div class="mcard-name">Canadian Dollar Exchange Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CHART: TSX -->
+    <div class="section-block">
+      <div class="widget-card">
+        <div class="widget-header" style="padding:18px 20px 14px;">
+          <div>
+            <h3>S&amp;P / TSX Composite Index</h3>
+            <p>Canada's primary equity benchmark — tracks the performance of the largest companies on the Toronto Stock Exchange</p>
+          </div>
+        </div>
+        <div class="widget-body">
+          <div class="tradingview-widget-container" style="height:400px;">
+            <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+              "autosize": true,
+              "symbol": "TSX:TSX",
+              "interval": "D",
+              "timezone": "America/Toronto",
+              "theme": "light",
+              "style": "2",
+              "locale": "en",
+              "gridColor": "rgba(13,51,80,0.04)",
+              "hide_top_toolbar": false,
+              "hide_legend": false,
+              "save_image": false,
+              "hide_volume": false,
+              "support_host": "https://www.tradingview.com"
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S&P 500 CHART -->
+    <div class="section-block">
+      <div class="widget-card">
+        <div class="widget-header" style="padding:18px 20px 14px;">
+          <div>
+            <h3>S&amp;P 500 Index</h3>
+            <p>The most widely followed US equity index — a key benchmark for global stock market performance</p>
+          </div>
+        </div>
+        <div class="widget-body">
+          <div class="tradingview-widget-container" style="height:360px;">
+            <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+              "autosize": true,
+              "symbol": "INDEX:SPX",
+              "interval": "D",
+              "timezone": "America/Toronto",
+              "theme": "light",
+              "style": "2",
+              "locale": "en",
+              "gridColor": "rgba(13,51,80,0.04)",
+              "hide_top_toolbar": false,
+              "hide_legend": false,
+              "save_image": false,
+              "hide_volume": false,
+              "support_host": "https://www.tradingview.com"
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET OVERVIEW WIDGET -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Global market overview</h2>
+        <span class="sub">Equities, bonds, commodities &amp; currencies</span>
+      </div>
+      <div class="widget-card">
+        <div class="widget-body">
+          <div class="tradingview-widget-container" style="height:500px;">
+            <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+              "colorTheme": "light",
+              "dateRange": "12M",
+              "showChart": true,
+              "locale": "en",
+              "largeChartUrl": "",
+              "isTransparent": false,
+              "showSymbolLogo": true,
+              "showFloatingTooltip": true,
+              "width": "100%",
+              "height": "500",
+              "tabs": [
+                {
+                  "title": "Indices",
+                  "symbols": [
+                    {"s": "TSX:TSX",    "d": "TSX Composite"},
+                    {"s": "INDEX:SPX",  "d": "S&P 500"},
+                    {"s": "INDEX:DJI",  "d": "Dow Jones"},
+                    {"s": "INDEX:IXIC", "d": "NASDAQ"},
+                    {"s": "INDEX:TSX60","d": "S&P/TSX 60"},
+                    {"s": "INDEX:FTSE", "d": "FTSE 100"}
+                  ],
+                  "originalTitle": "Indices"
+                },
+                {
+                  "title": "Currencies",
+                  "symbols": [
+                    {"s": "FX_IDC:CADUSD", "d": "CAD / USD"},
+                    {"s": "FX_IDC:CADEUR", "d": "CAD / EUR"},
+                    {"s": "FX:EURUSD",     "d": "EUR / USD"},
+                    {"s": "FX:GBPUSD",     "d": "GBP / USD"},
+                    {"s": "FX:USDJPY",     "d": "USD / JPY"},
+                    {"s": "FX:USDCNY",     "d": "USD / CNY"}
+                  ],
+                  "originalTitle": "Currencies"
+                },
+                {
+                  "title": "Commodities",
+                  "symbols": [
+                    {"s": "OANDA:XAUUSD",  "d": "Gold"},
+                    {"s": "OANDA:XAGUSD",  "d": "Silver"},
+                    {"s": "TVC:USOIL",     "d": "Crude Oil (WTI)"},
+                    {"s": "TVC:UKOIL",     "d": "Brent Crude"},
+                    {"s": "COMEX:HG1!",    "d": "Copper"}
+                  ],
+                  "originalTitle": "Commodities"
+                },
+                {
+                  "title": "Bonds",
+                  "symbols": [
+                    {"s": "CAPITALCOM:CA10Y", "d": "Canada 10Y"},
+                    {"s": "CAPITALCOM:CA2Y",  "d": "Canada 2Y"},
+                    {"s": "TVC:US10Y",        "d": "US 10Y"},
+                    {"s": "TVC:US02Y",        "d": "US 2Y"}
+                  ],
+                  "originalTitle": "Bonds"
+                }
+              ]
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECONOMIC INDICATORS -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Key Canadian economic indicators</h2>
+        <span class="sub">Updated quarterly / as released</span>
+      </div>
+      <div class="eco-grid">
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#8aa0b0" stroke-width="1.3"/><path d="M4 11l3-3 2 2 3-4" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bank of Canada Policy Rate
+          </div>
+          <div class="eco-val">2.75%</div>
+          <div class="eco-note">As of March 2025 — down from 5.00% peak</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:55%;background:var(--navy);"></div></div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#8aa0b0" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Canadian Inflation (CPI)
+          </div>
+          <div class="eco-val">2.3%</div>
+          <div class="eco-note">Feb 2025 — within Bank of Canada target range</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:46%;background:var(--green);"></div></div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 14l4-4 3 3 5-7" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Canadian GDP Growth
+          </div>
+          <div class="eco-val">+1.6%</div>
+          <div class="eco-note">Annual rate Q4 2024 — moderate expansion</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:40%;background:var(--gold);"></div></div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="10" r="3" stroke="#8aa0b0" stroke-width="1.3"/><circle cx="11" cy="5" r="3" stroke="#8aa0b0" stroke-width="1.3"/></svg>
+            Unemployment Rate
+          </div>
+          <div class="eco-val">6.6%</div>
+          <div class="eco-note">Feb 2025 — slight easing from recent highs</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:66%;background:var(--tan);"></div></div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 12h12M5 12V7l3-3 3 3v5" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Prime Lending Rate
+          </div>
+          <div class="eco-val">4.95%</div>
+          <div class="eco-note">Major Canadian banks — impacts mortgages &amp; loans</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:60%;background:var(--rose);"></div></div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-title">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1" y="9" width="4" height="6" stroke="#8aa0b0" stroke-width="1.3" rx="1"/><rect x="6" y="6" width="4" height="9" stroke="#8aa0b0" stroke-width="1.3" rx="1"/><rect x="11" y="3" width="4" height="12" stroke="#8aa0b0" stroke-width="1.3" rx="1"/></svg>
+            Canada 10Y Bond Yield
+          </div>
+          <div class="eco-val">3.08%</div>
+          <div class="eco-note">Government of Canada benchmark bond yield</div>
+          <div class="eco-bar"><div class="eco-bar-fill" style="width:38%;background:var(--navy-mid);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXCHANGE RATES -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Canadian dollar exchange rates</h2>
+        <span class="sub">Live rates via TradingView</span>
+      </div>
+      <div class="widget-card">
+        <div class="widget-body">
+          <div class="tradingview-widget-container" style="height:350px;">
+            <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+            {
+              "width": "100%",
+              "height": 350,
+              "currencies": ["CAD","USD","EUR","GBP","JPY","AUD","CHF","CNY"],
+              "isTransparent": false,
+              "colorTheme": "light",
+              "locale": "en",
+              "backgroundColor": "#ffffff"
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTEREST RATES -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Interest rates at a glance</h2>
+        <span class="sub">Rates as of April 2025</span>
+      </div>
+      <div class="widget-card" style="padding:20px 24px;">
+        <table class="rates-table" style="width:100%;">
+          <tr>
+            <td>Bank of Canada Overnight Rate</td>
+            <td>2.75% <span class="rate-chg down">▼ from 5.00% (2024 peak)</span></td>
+          </tr>
+          <tr>
+            <td>Canadian Prime Rate</td>
+            <td>4.95% <span class="rate-chg down">▼</span></td>
+          </tr>
+          <tr>
+            <td>Canada 5-Year Mortgage (typical fixed)</td>
+            <td>~4.49%–4.99%</td>
+          </tr>
+          <tr>
+            <td>Canada 5-Year Bond Yield</td>
+            <td>2.90% <span class="rate-chg down">▼</span></td>
+          </tr>
+          <tr>
+            <td>Canada 10-Year Bond Yield</td>
+            <td>3.08%</td>
+          </tr>
+          <tr>
+            <td>US Federal Funds Rate</td>
+            <td>4.25%–4.50%</td>
+          </tr>
+          <tr>
+            <td>RRSP TFSA Contribution Room (2025)</td>
+            <td>TFSA: $7,000 &nbsp;·&nbsp; RRSP: 18% of 2024 income</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- HEAT MAP -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>TSX sector performance</h2>
+        <span class="sub">Live market heat map</span>
+      </div>
+      <div class="widget-card">
+        <div class="widget-body">
+          <div class="tradingview-widget-container" style="height:500px;">
+            <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+            {
+              "exchanges": [],
+              "dataSource": "SPX500",
+              "grouping": "sector",
+              "blockSize": "market_cap_basic",
+              "blockColor": "change",
+              "locale": "en",
+              "symbolUrl": "",
+              "colorTheme": "light",
+              "hasTopBar": true,
+              "isDataSetEnabled": true,
+              "isZoomEnabled": true,
+              "hasSymbolTooltip": true,
+              "isMonoSize": false,
+              "width": "100%",
+              "height": "500"
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET COMMENTARY -->
+    <div class="section-block">
+      <div class="section-head">
+        <h2>Carrie's market context</h2>
+        <span class="sub">What current conditions mean for your plan</span>
+      </div>
+      <div class="commentary-grid">
+        <div class="commentary-card">
+          <span class="comm-tag" style="background:#e8f0f6;color:var(--navy);">Interest rates</span>
+          <h3>Rate cuts are good news for borrowers — but act thoughtfully</h3>
+          <p>With the Bank of Canada cutting rates from 5.00% to 2.75%, mortgage renewals and variable-rate borrowers are seeing relief. But lower rates also mean GIC and savings yields are falling — making a diversified investment strategy more important than ever.</p>
+          <div class="comm-footer">
+            <span>Retirement &amp; investing</span>
+            <a href="insights.html" class="comm-link">Read insights <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+        <div class="commentary-card">
+          <span class="comm-tag" style="background:var(--gold-pale);color:var(--tan);">Inflation</span>
+          <h3>Inflation back near target — what it means for your retirement savings</h3>
+          <p>With CPI at 2.3%, inflation has returned close to the Bank of Canada's 2% target. This is positive for fixed-income investments and retirement income planning — but long-term planners should still account for inflation eroding purchasing power over 20–30 years.</p>
+          <div class="comm-footer">
+            <span>Retirement planning</span>
+            <a href="insights-retirement.html" class="comm-link">Read insights <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+        <div class="commentary-card">
+          <span class="comm-tag" style="background:var(--green-pale);color:var(--green);">Equities</span>
+          <h3>Global markets remain resilient — staying invested matters most</h3>
+          <p>Despite ongoing uncertainty, diversified equity portfolios have rewarded patient investors. Trying to time the market is rarely effective — a consistent, long-term strategy aligned with your risk tolerance and time horizon will outperform short-term reactions.</p>
+          <div class="comm-footer">
+            <span>Investment planning</span>
+            <a href="services.html#investments" class="comm-link">Our services <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#8aa0b0" stroke-width="1.4"/><path d="M10 9v5M10 7v.5" stroke="#8aa0b0" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <p><strong>Disclaimer:</strong> All market data displayed on this page is sourced from TradingView and is provided for informational and educational purposes only. It does not constitute financial, investment, or tax advice. Market data may be delayed. Economic indicator figures are as of the dates noted and are subject to revision. Past performance is not indicative of future results. Please consult Carrie Wang directly for advice tailored to your personal financial situation.</p>
+    </div>
+
+  </div><!-- /left column -->
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Carrie card -->
+    <div class="sb-card navy">
+      <div class="carrie-row">
+        <div class="carrie-ava">
+          <img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="Carrie Wang" onerror="this.style.display='none';">
+        </div>
+        <div>
+          <div class="carrie-name">Carrie Wang</div>
+          <div class="carrie-role">CEA, CLU® · MDRT · Sun Life</div>
+        </div>
+      </div>
+      <p>Markets change — your plan shouldn't have to. Book a free conversation with Carrie to make sure your investments are aligned with your goals, whatever the market is doing.</p>
+      <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="sb-btn gold-btn">Book a free consultation</a>
+    </div>
+
+    <!-- Rate snapshot card -->
+    <div class="sb-card">
+      <h3>Rate snapshot</h3>
+      <table class="rates-table" style="width:100%;">
+        <tr><td style="font-size:12.5px;">BoC Policy Rate</td><td style="font-size:13px;">2.75%</td></tr>
+        <tr><td style="font-size:12.5px;">Prime Rate</td><td style="font-size:13px;">4.95%</td></tr>
+        <tr><td style="font-size:12.5px;">CPI Inflation</td><td style="font-size:13px;">2.3%</td></tr>
+        <tr><td style="font-size:12.5px;">Unemployment</td><td style="font-size:13px;">6.6%</td></tr>
+        <tr><td style="font-size:12.5px;">CAD / USD</td><td style="font-size:13px;">~$0.72</td></tr>
+        <tr><td style="font-size:12.5px;">TFSA Limit (2025)</td><td style="font-size:13px;">$7,000</td></tr>
+      </table>
+    </div>
+
+    <!-- Mini chart: CAD/USD -->
+    <div class="sb-card" style="padding:0;overflow:hidden;">
+      <div style="padding:16px 18px 8px;">
+        <h3 style="font-size:15px;">CAD / USD Live</h3>
+      </div>
+      <div class="tradingview-widget-container" style="height:200px;">
+        <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+        {
+          "symbol": "FX_IDC:CADUSD",
+          "width": "100%",
+          "height": 200,
+          "locale": "en",
+          "dateRange": "3M",
+          "colorTheme": "light",
+          "isTransparent": false,
+          "autosize": false,
+          "largeChartUrl": ""
+        }
+        </script>
+      </div>
+    </div>
+
+    <!-- Mini chart: Gold -->
+    <div class="sb-card" style="padding:0;overflow:hidden;">
+      <div style="padding:16px 18px 8px;">
+        <h3 style="font-size:15px;">Gold (XAU/USD)</h3>
+      </div>
+      <div class="tradingview-widget-container" style="height:200px;">
+        <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+        {
+          "symbol": "OANDA:XAUUSD",
+          "width": "100%",
+          "height": 200,
+          "locale": "en",
+          "dateRange": "3M",
+          "colorTheme": "light",
+          "isTransparent": false,
+          "autosize": false,
+          "largeChartUrl": ""
+        }
+        </script>
+      </div>
+    </div>
+
+    <!-- Resources -->
+    <div class="sb-card">
+      <h3>Useful resources</h3>
+      <div class="res-list">
+        <a href="https://www.bankofcanada.ca/rates/" target="_blank" class="res-link">
+          <div class="res-icon" style="background:#e8f0f6;">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="#0D3350" stroke-width="1.4"/><path d="M2 8h16" stroke="#0D3350" stroke-width="1.4"/></svg>
+          </div>
+          <div>
+            <h4>Bank of Canada Rates</h4>
+            <p>Official policy rate &amp; bond yields</p>
+          </div>
+        </a>
+        <a href="https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/rrsps-related-plans/making-contributions/contribution-room.html" target="_blank" class="res-link">
+          <div class="res-icon" style="background:var(--gold-pale);">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 5v5c0 4-4 7-8 8-4-1-8-4-8-8V7l8-5z" stroke="#C9A84C" stroke-width="1.4"/></svg>
+          </div>
+          <div>
+            <h4>RRSP Contribution Room</h4>
+            <p>CRA — check your available room</p>
+          </div>
+        </a>
+        <a href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/retirement-pension.html" target="_blank" class="res-link">
+          <div class="res-icon" style="background:var(--green-pale);">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#1D9E75" stroke-width="1.4"/><path d="M10 6v4l2.5 2.5" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h4>CPP Retirement Pension</h4>
+            <p>Government of Canada — estimate your CPP</p>
+          </div>
+        </a>
+        <a href="https://www.sunlife.ca/en/investments/market-updates/" target="_blank" class="res-link">
+          <div class="res-icon" style="background:#faf3e0;">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4" stroke="#C9A84C" stroke-width="1.4"/><line x1="10" y1="2" x2="10" y2="5" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><line x1="10" y1="15" x2="10" y2="18" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="10" x2="5" y2="10" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><line x1="15" y1="10" x2="18" y2="10" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h4>Sun Life Market Updates</h4>
+            <p>Official Sun Life investment commentary</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- CTA gold -->
+    <div class="sb-card gold">
+      <h3>Have a market question?</h3>
+      <p>Markets move — but your financial plan should be built to withstand volatility. Carrie can review your portfolio and make sure you're on track.</p>
+      <a href="contact.html" class="sb-btn navy-btn">Send Carrie a message</a>
+    </div>
+
+  </aside>
+</div><!-- /main-layout -->
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div>
+    <h2>Want to know how market conditions affect your plan?</h2>
+    <p>Book a free conversation with Carrie — she'll translate market movements into clear, actionable guidance for your specific situation.</p>
+  </div>
+  <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">Book a free consultation</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Sun Life Advisor</div>
+      <p>Helping families and business owners in Ontario and Saskatchewan build wealth, protect what matters, and plan with confidence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#retirement">Retirement planning</a></li>
+        <li><a href="services.html#estate">Estate planning</a></li>
+        <li><a href="services.html#business">Business solutions</a></li>
+        <li><a href="services.html#investments">Investments</a></li>
+        <li><a href="services.html#insurance">Life insurance</a></li>
+        <li><a href="services.html#critical">Critical illness</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="insights.html">Insights &amp; tips</a></li>
+        <li><a href="market.html">Market information</a></li>
+        <li><a href="about.html">About Carrie</a></li>
+        <li><a href="https://advisor.sunlife.ca/carrie.wang/" target="_blank">Sun Life profile</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a></li>
+        <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+        <li><a href="tel:6475008885">(647) 500-8885</a></li>
+        <li><a href="contact.html">5775 Yonge St, Suite 1900</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Market data provided by TradingView. For informational purposes only. Not investment advice.</p>
+    <div class="footer-sun">
+      <img src="ICON.png" alt="Seven Lakes" class="footer-icon">
+      <span>Seven Lakes Financial</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
