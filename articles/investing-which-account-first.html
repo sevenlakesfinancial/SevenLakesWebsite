@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFSA, RRSP, RESP or Non-Registered: Which Account First? | Seven Lakes Financial</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D3350; --navy-mid: #1a4a6b;
+    --gold: #C9A84C; --gold-light: #e8c96a; --gold-pale: #faf4e4;
+    --tan: #b5956a; --cream: #fdfaf5; --white: #ffffff;
+    --text-dark: #1a2a35; --text-mid: #4a6070; --text-light: #8aa0b0;
+    --border: rgba(13,51,80,0.1);
+    --green: #1D9E75; --green-pale: #e6f4ee; --rose: #993556;
+    --radius: 12px; --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--cream); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 70px; border-bottom: 1px solid rgba(13,51,80,0.1); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 100%; }
+  .nav-logo img { height: 50px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+  .nav-links a { color: var(--text-dark); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--navy); background: rgba(13,51,80,0.05); }
+  .nav-links a.active { color: var(--navy); font-weight: 500; }
+  .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ARTICLE HEADER */
+  .article-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 3rem 3rem 2.5rem; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--text-light); font-size: 12px; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--navy); }
+  .breadcrumb span { color: var(--border); font-size: 12px; }
+  .breadcrumb strong { color: var(--text-mid); font-size: 12px; font-weight: 400; }
+  .art-category { display: inline-block; background: var(--gold-pale); color: var(--tan); font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.3px; }
+  .article-header h1 { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 500; color: var(--navy); line-height: 1.25; margin-bottom: 16px; letter-spacing: -0.5px; max-width: 800px; }
+  .article-header .lede { font-size: 18px; color: var(--text-mid); line-height: 1.7; font-weight: 300; max-width: 680px; margin-bottom: 24px; }
+  .article-meta { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+  .author-chip { display: flex; align-items: center; gap: 10px; padding-right: 20px; margin-right: 20px; border-right: 1px solid var(--border); }
+  .author-chip img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(201,168,76,0.3); }
+  .author-chip .name { font-size: 13.5px; font-weight: 500; color: var(--navy); display: block; }
+  .author-chip .role { font-size: 11.5px; color: var(--text-light); }
+  .meta-items { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--text-light); }
+  .meta-item svg { opacity: 0.5; flex-shrink: 0; }
+
+  /* COVER IMAGE STRIP */
+  .cover-strip { height: 10px; background: linear-gradient(90deg, #b5956a, #C9A84C, #e8c96a); }
+
+  /* MAIN LAYOUT */
+  .main-layout { padding: 3rem 3rem 5rem; display: grid; grid-template-columns: 1fr 290px; gap: 3.5rem; align-items: start; max-width: 1200px; margin: 0 auto; }
+
+  /* ARTICLE BODY */
+  .article-body { max-width: 700px; }
+  .article-body h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--navy); margin: 36px 0 12px; letter-spacing: -0.3px; line-height: 1.3; }
+  .article-body h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--navy); margin: 28px 0 10px; }
+  .article-body p  { font-size: 16px; color: var(--text-mid); line-height: 1.85; font-weight: 300; margin-bottom: 18px; }
+  .article-body p strong { color: var(--navy); font-weight: 500; }
+  .article-body ul { margin: 10px 0 20px 0; list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .article-body ul li { display: flex; align-items: flex-start; gap: 11px; font-size: 15.5px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+  .article-body ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 9px; flex-shrink: 0; }
+
+  /* Callout */
+  .callout { background: var(--gold-pale); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 20px 24px; margin: 28px 0; }
+  .callout p { color: var(--navy); font-size: 15px; line-height: 1.75; font-weight: 400; margin: 0; }
+  .callout strong { font-weight: 500; }
+
+  /* Number boxes */
+  .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+  .num-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 16px; text-align: center; }
+  .num-box .big { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 600; color: var(--navy); display: block; }
+  .num-box .lbl { font-size: 12px; color: var(--text-light); line-height: 1.4; margin-top: 5px; }
+
+  /* Account cards */
+  .acct-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+  .acct-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 16px; }
+  .acct-abbr { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--navy); }
+  .acct-full { font-size: 11px; color: var(--text-light); margin: 3px 0 8px; line-height: 1.3; }
+  .acct-card p { font-size: 13px; color: var(--text-mid); line-height: 1.55; font-weight: 300; margin: 0; }
+  .acct-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 9px; border-radius: 20px; }
+
+  /* Steps */
+  .step-list { display: flex; flex-direction: column; gap: 18px; margin: 20px 0 28px; }
+  .step-item { display: flex; align-items: flex-start; gap: 16px; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--navy); color: var(--gold); font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; display: grid; place-items: center; flex-shrink: 0; margin-top: 2px; }
+  .step-item h4 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .step-item p  { font-size: 14px; color: var(--text-mid); line-height: 1.65; font-weight: 300; margin: 0; }
+
+  /* Comparison table */
+  .table-wrap { overflow-x: auto; margin: 20px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; background: var(--white); }
+  thead th { background: var(--navy); color: #fff; font-size: 13px; font-weight: 500; padding: 13px 16px; text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--gold-pale); }
+  tbody td { padding: 12px 16px; font-size: 13.5px; color: var(--text-mid); font-weight: 300; vertical-align: middle; }
+  tbody td:first-child { color: var(--navy); font-weight: 500; }
+  .tick { color: var(--green); }
+  .cross { color: #bbb; }
+
+  /* Article footer */
+  .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .article-footer .author-bio { display: flex; align-items: flex-start; gap: 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+  .bio-ava { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(201,168,76,0.4); flex-shrink: 0; background: var(--gold); }
+  .bio-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bio-text h4 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .bio-text .creds { font-size: 12px; color: var(--tan); margin-bottom: 8px; }
+  .bio-text p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+
+  /* Related articles */
+  .related { margin-top: 2.5rem; }
+  .related h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: var(--navy); margin-bottom: 1rem; letter-spacing: -0.2px; }
+  .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rel-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; display: block; transition: transform 0.2s, border-color 0.2s; }
+  .rel-card:hover { transform: translateY(-3px); border-color: rgba(13,51,80,0.2); }
+  .rel-thumb { height: 100px; display: flex; align-items: flex-end; padding: 10px; }
+  .rel-tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
+  .rel-body { padding: 14px 16px 16px; }
+  .rel-body h4 { font-family: 'Playfair Display', serif; font-size: 14.5px; font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 6px; }
+  .rel-body span { font-size: 12px; color: var(--text-light); }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 90px; }
+  .sb { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+  .sb h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+  .sb.navy { background: var(--navy); border-color: transparent; }
+  .sb.navy h3 { color: #fff; }
+  .sb.navy p  { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .sb.gold { background: var(--gold); border-color: transparent; }
+  .sb.gold h3 { color: var(--navy); }
+  .sb.gold p  { color: rgba(13,51,80,0.65); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .carrie-row { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+  .carrie-ava { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(201,168,76,0.4); flex-shrink: 0; background: var(--gold); }
+  .carrie-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .carrie-name { color: #fff; font-size: 13.5px; font-weight: 500; }
+  .carrie-role { color: rgba(255,255,255,0.4); font-size: 11.5px; }
+  .sb-btn { display: block; text-align: center; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 10px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+  .sb-btn.gold-btn { background: var(--gold); color: var(--navy); }
+  .sb-btn.gold-btn:hover { background: var(--gold-light); }
+  .sb-btn.white-btn { background: #fff; color: var(--navy); }
+  .sb-btn.white-btn:hover { background: #f0f4f8; }
+  .sb-btn.navy-btn { background: var(--navy); color: #fff; }
+  .sb-btn.navy-btn:hover { background: var(--navy-mid); }
+  /* TOC */
+  .toc-list { display: flex; flex-direction: column; gap: 2px; }
+  .toc-item { display: block; font-size: 13px; color: var(--text-mid); padding: 7px 10px; border-radius: 7px; text-decoration: none; border-left: 2px solid transparent; transition: all 0.15s; font-weight: 300; }
+  .toc-item:hover { color: var(--navy); background: var(--cream); border-left-color: var(--gold); }
+  .toc-item.active { color: var(--navy); font-weight: 500; border-left-color: var(--gold); background: var(--gold-pale); }
+  /* Contact */
+  .contact-list { display: flex; flex-direction: column; gap: 9px; }
+  .contact-item { display: flex; align-items: center; gap: 9px; }
+  .contact-item a { color: var(--text-mid); font-size: 13px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .contact-item a:hover { color: var(--navy); }
+
+  /* CTA BAND */
+  .cta-band { background: var(--gold); padding: 3.5rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .cta-band p { color: rgba(13,51,80,0.65); font-size: 14px; font-weight: 300; }
+  .btn-navy { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-navy:hover { background: var(--navy-mid); }
+
+  /* FOOTER */
+  footer { background: #091f30; padding: 3rem; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand strong { display: block; color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .footer-brand .sub { color: var(--gold); font-size: 11.5px; }
+  .footer-brand p { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.65; margin-top: 12px; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .footer-sun { display: flex; align-items: center; gap: 10px; }
+  .footer-icon { width: 24px; height: auto; display: block; }
+  .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+  @media (max-width: 1024px) { .main-layout { grid-template-columns: 1fr; } .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; } .acct-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 960px) { nav { padding: 0 1.5rem; } .nav-links { display: none; } .article-header { padding: 2.5rem 1.5rem; } .article-header h1 { font-size: 30px; } .main-layout { padding: 2.5rem 1.5rem 3.5rem; } .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .num-grid { grid-template-columns: 1fr; } .acct-grid { grid-template-columns: 1fr; } .related-grid { grid-template-columns: 1fr; } .sidebar { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; } .nav-logo img { height: 38px !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><img src="../LOGO.png" alt="Seven Lakes Financial Services Inc."></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li><a href="../insights.html" class="active">Insights</a></li>
+    <li><a href="../market.html">Market</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <div class="breadcrumb">
+    <a href="../index.html">Home</a><span>›</span>
+    <a href="../insights.html">Insights</a><span>›</span>
+    <a href="../insights-investing.html">Investing</a><span>›</span>
+    <strong>Which account first?</strong>
+  </div>
+  <span class="art-category">📈 Investment planning</span>
+  <h1>TFSA, RRSP, RESP, or non-registered — which account should you invest in first?</h1>
+  <p class="lede">Most Canadians have limited dollars to invest and multiple account options. Here's the priority order that works for most situations — and when to switch things up.</p>
+  <div class="article-meta">
+    <div class="author-chip">
+      <img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="Carrie Wang" onerror="this.style.display='none';">
+      <div>
+        <span class="name">Carrie Wang</span>
+        <span class="role">CEA, CLU® · Sun Life Advisor</span>
+      </div>
+    </div>
+    <div class="meta-items">
+      <span class="meta-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#8aa0b0" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round"/></svg> 7 min read</span>
+      <span class="meta-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="#8aa0b0" stroke-width="1.3"/><path d="M1 6h14" stroke="#8aa0b0" stroke-width="1.3"/><path d="M5 1v2M11 1v2" stroke="#8aa0b0" stroke-width="1.3" stroke-linecap="round"/></svg> Updated April 2025</span>
+      <span class="meta-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1L10 6h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z" stroke="#8aa0b0" stroke-width="1.3" stroke-linejoin="round"/></svg> Investment fundamentals</span>
+    </div>
+  </div>
+</header>
+
+<div class="cover-strip"></div>
+
+<!-- MAIN -->
+<div class="main-layout">
+
+  <!-- ARTICLE CONTENT -->
+  <article class="article-body">
+
+    <p>One of the most common questions I hear from clients — especially those just starting to invest — is: <strong>"I have some money to invest. Where should I put it?"</strong> The answer depends on your income, your goals, whether you have children, and what your tax situation looks like in retirement. But there is a general priority order that works for most Canadians.</p>
+
+    <h2 id="accounts">Your four main account options</h2>
+    <p>Before we get to the priority order, here's a quick look at each account type and what makes it unique:</p>
+
+    <div class="acct-grid">
+      <div class="acct-card">
+        <div class="acct-abbr">TFSA</div>
+        <div class="acct-full">Tax-Free Savings Account</div>
+        <p>Grow and withdraw money completely tax-free. Withdrawals don't affect OAS or GIS benefits in retirement.</p>
+        <span class="acct-badge" style="background:var(--green-pale);color:var(--green);">Tax-free growth &amp; withdrawal</span>
+      </div>
+      <div class="acct-card">
+        <div class="acct-abbr">RRSP</div>
+        <div class="acct-full">Registered Retirement Savings Plan</div>
+        <p>Contributions reduce your taxable income today. Investments grow tax-sheltered until you withdraw in retirement.</p>
+        <span class="acct-badge" style="background:#e8f0f6;color:var(--navy);">Tax deduction + deferred growth</span>
+      </div>
+      <div class="acct-card">
+        <div class="acct-abbr">RESP</div>
+        <div class="acct-full">Registered Education Savings Plan</div>
+        <p>Save for your child's education with government matching grants up to $7,200 per child over their lifetime.</p>
+        <span class="acct-badge" style="background:var(--gold-pale);color:var(--tan);">Free government grants</span>
+      </div>
+      <div class="acct-card">
+        <div class="acct-abbr">Non-Reg</div>
+        <div class="acct-full">Non-Registered Account</div>
+        <p>No contribution limits and no tax shelter. Full flexibility with no restrictions on access or amount.</p>
+        <span class="acct-badge" style="background:#f5eaee;color:var(--rose);">No limits, full flexibility</span>
+      </div>
+    </div>
+
+    <h2 id="priority">The recommended priority order</h2>
+    <p>For most Canadian families, here is the order Carrie recommends when deciding where to invest your next available dollar:</p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Employer RRSP match — if available, always do this first</h4>
+          <p>If your employer matches RRSP contributions, contribute at least enough to capture the full match. This is an immediate 50–100% return before a single investment gain occurs. No other financial move delivers that kind of instant return.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>
+          <h4>RESP — if you have children under 17</h4>
+          <p>Contribute at least $2,500 per child per year to receive the full annual Canada Education Savings Grant (CESG) of $500. The government is giving you free money — this should take priority over most other investing. Over a child's lifetime, this can add up to $7,200 in grants, plus all the investment growth on top.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>
+          <h4>TFSA — flexible, powerful, and right for most Canadians next</h4>
+          <p>For most people, the TFSA is the next best home for your money. Tax-free growth and completely tax-free withdrawals make it ideal for almost any goal — whether that's a home down payment, car, emergency fund, or retirement savings. Withdrawals don't count as income, so they never affect your OAS, GIS, or other income-tested government benefits.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div>
+          <h4>RRSP — especially if your income is above $80,000</h4>
+          <p>If you're earning $80,000 or more, RRSP contributions deliver powerful tax refunds that you can reinvest immediately. The higher your income today, the more valuable the deduction becomes — especially if you expect your tax rate to be lower in retirement. A $20,000 RRSP contribution in a 43% tax bracket saves $8,600 in taxes this year.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div>
+          <h4>Non-registered — once registered accounts are maximized</h4>
+          <p>Once your TFSA and RRSP contribution room is used up, a non-registered account is an excellent overflow vehicle. There are no contribution limits, capital gains are taxed at a preferential rate, and Canadian dividends receive a tax credit — making it more tax-efficient than it might seem.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Carrie's practical tip:</strong> For most of my clients with children, we prioritize the RESP first (to capture government grants), then split remaining savings between the TFSA and RRSP based on current income. If you're unsure which order is right for your situation, let's walk through it together — the right answer changes based on your income, family situation, and retirement timeline.</p>
+    </div>
+
+    <h2 id="tfsarrsp">TFSA vs RRSP: the one question that decides it</h2>
+    <p>The single most important factor in choosing between TFSA and RRSP is: <strong>Is your marginal tax rate today higher or lower than it will be in retirement?</strong></p>
+    <ul>
+      <li>If your income is <strong>high now and will be lower in retirement</strong> → <strong>RRSP</strong> wins. The deduction saves you tax at your high current rate; you pay tax at a lower rate later.</li>
+      <li>If your income is <strong>moderate or similar in retirement</strong> → <strong>TFSA</strong> wins. No tax deduction now, but withdrawals are completely tax-free forever — and won't affect OAS, GIS, or income-tested benefits.</li>
+      <li>If you're <strong>unsure</strong> → <strong>do both</strong>. Split contributions and give yourself flexibility to draw from both in retirement, managing your taxable income each year.</li>
+    </ul>
+
+    <div class="num-grid">
+      <div class="num-box"><span class="big">$7,000</span><span class="lbl">2025 TFSA annual contribution limit</span></div>
+      <div class="num-box"><span class="big">18%</span><span class="lbl">Of 2024 earned income — your 2025 RRSP limit</span></div>
+      <div class="num-box"><span class="big">$2,500</span><span class="lbl">RESP contribution per year that maximizes the annual CESG grant</span></div>
+    </div>
+
+    <h2 id="comparison">Side-by-side comparison</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Account</th><th>Tax deduction</th><th>Tax-free growth</th><th>Tax-free withdrawal</th><th>Affects OAS/GIS?</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>TFSA</td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td><td>No</td><td>Most goals, any income</td></tr>
+          <tr><td>RRSP</td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td><td><span class="cross">—</span></td><td>Yes</td><td>High earners, retirement</td></tr>
+          <tr><td>RESP</td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td><td>Taxed in student's hands</td><td>No</td><td>Children's education</td></tr>
+          <tr><td>Non-Reg</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td>Yes</td><td>Overflow investing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="bottomline">The bottom line</h2>
+    <p>There's no single right answer for everyone — the best account strategy depends entirely on your personal income, life stage, family situation, and retirement goals. But the framework above gives you a strong starting point. And if you're not sure where you fall, a brief conversation with Carrie can give you a clear, personalized answer in minutes.</p>
+
+    <div class="callout">
+      <p><strong>Ready to figure out your own priority order?</strong> Book a free consultation with Carrie — she'll review your current accounts, income, and goals and give you a clear, concrete recommendation tailored to your situation.</p>
+    </div>
+
+    <!-- AUTHOR BIO -->
+    <div class="article-footer">
+      <div class="author-bio">
+        <div class="bio-ava">
+          <img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="Carrie Wang" onerror="this.style.display='none';">
+        </div>
+        <div class="bio-text">
+          <h4>Carrie Wang</h4>
+          <div class="creds">CEA · CLU® · MDRT Member · Sun Life Financial Advisor</div>
+          <p>Carrie is the founder of Seven Lakes Financial Services Inc. and a Sun Life advisor serving clients across Ontario and Saskatchewan. She specializes in retirement, estate, and investment planning, with a warm, personalized approach. She is fluent in English, Mandarin, and Taiwanese.</p>
+        </div>
+      </div>
+
+      <!-- RELATED ARTICLES -->
+      <div class="related">
+        <h3>Related articles</h3>
+        <div class="related-grid">
+          <a href="investing-resp-guide.html" class="rel-card">
+            <div class="rel-thumb" style="background:linear-gradient(135deg,#b5956a,#8c6a3f);">
+              <span class="rel-tag" style="background:rgba(255,255,255,0.9);color:#8c6a3f;">RESP</span>
+            </div>
+            <div class="rel-body">
+              <h4>RESP explained: how to maximize the government grant for your child's education</h4>
+              <span>5 min read</span>
+            </div>
+          </a>
+          <a href="investing-risk-tolerance.html" class="rel-card">
+            <div class="rel-thumb" style="background:linear-gradient(135deg,#0D3350,#1a4a6b);">
+              <span class="rel-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Risk &amp; returns</span>
+            </div>
+            <div class="rel-body">
+              <h4>What is your risk tolerance — and why does it matter for your investments?</h4>
+              <span>5 min read</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Table of contents -->
+    <div class="sb">
+      <h3>In this article</h3>
+      <div class="toc-list">
+        <a href="#accounts"    class="toc-item active">Your four account options</a>
+        <a href="#priority"    class="toc-item">The priority order</a>
+        <a href="#tfsarrsp"    class="toc-item">TFSA vs RRSP explained</a>
+        <a href="#comparison"  class="toc-item">Side-by-side comparison</a>
+        <a href="#bottomline"  class="toc-item">The bottom line</a>
+      </div>
+    </div>
+
+    <!-- Carrie CTA -->
+    <div class="sb navy">
+      <div class="carrie-row">
+        <div class="carrie-ava"><img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="Carrie Wang" onerror="this.style.display='none';"></div>
+        <div><div class="carrie-name">Carrie Wang</div><div class="carrie-role">CEA, CLU® · MDRT</div></div>
+      </div>
+      <p>Not sure which account is right for you? Book a free conversation — Carrie will give you a clear recommendation in minutes.</p>
+      <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="sb-btn gold-btn">Book a free consultation</a>
+    </div>
+
+    <!-- 2025 Limits -->
+    <div class="sb">
+      <h3>2025 key limits</h3>
+      <table style="width:100%;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:9px 0;font-size:12.5px;color:var(--text-mid);font-weight:300;">TFSA annual limit</td><td style="padding:9px 0;font-size:13px;font-weight:500;color:var(--navy);text-align:right;">$7,000</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:9px 0;font-size:12.5px;color:var(--text-mid);font-weight:300;">RRSP limit</td><td style="padding:9px 0;font-size:13px;font-weight:500;color:var(--navy);text-align:right;">18% of income</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:9px 0;font-size:12.5px;color:var(--text-mid);font-weight:300;">RESP (lifetime)</td><td style="padding:9px 0;font-size:13px;font-weight:500;color:var(--navy);text-align:right;">$50,000/child</td></tr>
+        <tr><td style="padding:9px 0;font-size:12.5px;color:var(--text-mid);font-weight:300;">CESG (annual max)</td><td style="padding:9px 0;font-size:13px;font-weight:500;color:var(--navy);text-align:right;">$500/child</td></tr>
+      </table>
+    </div>
+
+    <!-- More articles -->
+    <div class="sb">
+      <h3>More investing articles</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="investing-resp-guide.html" style="font-size:13px;color:var(--navy);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:300;">RESP: maximize government grants <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="investing-risk-tolerance.html" style="font-size:13px;color:var(--navy);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:300;">Understanding your risk tolerance <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="investing-market-timing.html" style="font-size:13px;color:var(--navy);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:300;">Why market timing backfires <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="investing-mutual-funds.html" style="font-size:13px;color:var(--navy);text-decoration:none;padding:8px 0;display:flex;align-items:center;justify-content:space-between;font-weight:300;">How Sun Life mutual funds work <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="sb">
+      <h3>Get in touch</h3>
+      <div class="contact-list">
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M5 2h3l1.5 4-2 1.2A10 10 0 0012.8 11.5L14 9.5l4 1.5v3A2 2 0 0116 16C9 16 4 11 4 4a2 2 0 011-2z" stroke="#C9A84C" stroke-width="1.4"/></svg>
+          <a href="tel:6475008885">(647) 500-8885</a>
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M3 5h14v10H3z" stroke="#C9A84C" stroke-width="1.4"/><path d="M3 5l7 6 7-6" stroke="#C9A84C" stroke-width="1.4"/></svg>
+          <a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<section class="cta-band">
+  <div>
+    <h2>Want to figure out your own account priority order?</h2>
+    <p>Book a free consultation — Carrie will review your situation and give you a clear, personalized recommendation.</p>
+  </div>
+  <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">Book a free consultation</a>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Sun Life Advisor</div>
+      <p>Helping families and business owners in Ontario and Saskatchewan build wealth, protect what matters, and plan with confidence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="../services.html#retirement">Retirement planning</a></li>
+        <li><a href="../services.html#estate">Estate planning</a></li>
+        <li><a href="../services.html#business">Business solutions</a></li>
+        <li><a href="../services.html#investments">Investments</a></li>
+        <li><a href="../services.html#insurance">Life insurance</a></li>
+        <li><a href="../services.html#critical">Critical illness</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Insights</h4>
+      <ul>
+        <li><a href="../insights-retirement.html">Retirement</a></li>
+        <li><a href="../insights-investing.html">Investing</a></li>
+        <li><a href="../insights-insurance.html">Insurance</a></li>
+        <li><a href="../insights-estate.html">Estate planning</a></li>
+        <li><a href="../insights-business.html">Business</a></li>
+        <li><a href="../insights-tax.html">Tax tips</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a></li>
+        <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+        <li><a href="tel:6475008885">(647) 500-8885</a></li>
+        <li><a href="../contact.html">5775 Yonge St, Suite 1900</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; Carrie Wang, CEA, CLU® &nbsp;·&nbsp; Advisors conduct insurance business through Sun Life Financial Distributors (Canada) Inc.</p>
+    <div class="footer-sun"><img src="../ICON.png" alt="Seven Lakes" class="footer-icon"><span>Seven Lakes Financial</span></div>
+  </div>
+</footer>
+
+<script>
+  // Highlight active TOC item on scroll
+  const sections = document.querySelectorAll('h2[id]');
+  const tocItems = document.querySelectorAll('.toc-item');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    tocItems.forEach(item => {
+      item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
