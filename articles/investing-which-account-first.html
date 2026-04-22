@@ -184,21 +184,43 @@
   @media (max-width: 1024px) { .main-layout { grid-template-columns: 1fr; } .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; } .acct-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 960px) { nav { padding: 0 1.5rem; } .nav-links { display: none; } .article-header { padding: 2.5rem 1.5rem; } .article-header h1 { font-size: 30px; } .main-layout { padding: 2.5rem 1.5rem 3.5rem; } .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .footer-top { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 640px) { .num-grid { grid-template-columns: 1fr; } .acct-grid { grid-template-columns: 1fr; } .related-grid { grid-template-columns: 1fr; } .sidebar { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; } .nav-logo img { height: 38px !important; } }
+  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher{display:flex;align-items:center;gap:2px;margin-left:12px;padding-left:12px;border-left:1px solid rgba(13,51,80,0.15);}
+  .ls-btn{font-size:12px;font-weight:500;color:var(--text-light);text-decoration:none;padding:4px 7px;border-radius:5px;transition:all .2s;white-space:nowrap;}
+  .ls-btn:hover{color:var(--navy);background:rgba(13,51,80,0.06);}
+  .ls-btn.ls-active{color:var(--navy);background:rgba(13,51,80,0.09);font-weight:600;}
+  @media(max-width:960px){.lang-switcher{margin-left:8px;padding-left:8px;}}
+  @media(max-width:600px){.ls-btn{font-size:11px;padding:3px 5px;}}
 </style>
+
+  <link rel="alternate" hreflang="en"    href="about.html">
+  <link rel="alternate" hreflang="zh-TW" href="zh-TW/about.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh-CN/about.html">
+  <link rel="alternate" hreflang="x-default" href="about.html">
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="../index.html"><img src="../LOGO.png" alt="Seven Lakes Financial Services Inc."></a>
+  <a class="nav-logo" href="../index.html">
+    <img src="../LOGO.png" alt="Seven Lakes Financial Services Inc.">
+  </a>
   <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html" class="active">Home</a></li>
     <li><a href="../about.html">About</a></li>
     <li><a href="../services.html">Services</a></li>
-    <li><a href="../insights.html" class="active">Insights</a></li>
+    <li><a href="../insights.html">Insights</a></li>
     <li><a href="../market.html">Market</a></li>
     <li><a href="../contact.html">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">Book a meeting</a>
+    
+    <div class="lang-switcher">
+      <a href="../index.html" class="ls-btn ls-active">EN</a>
+      <a href="../zh-TW/index.html" class="ls-btn">繁中</a>
+      <a href="../zh-CN/index.html" class="ls-btn">简中</a>
+    </div>
+  </div>
 </nav>
 
 <!-- ARTICLE HEADER -->

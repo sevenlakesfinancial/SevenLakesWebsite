@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights & Financial Tips | Seven Lakes Financial Services Inc. | Sun Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D3350; --navy-mid: #1a4a6b;
+    --gold: #C9A84C; --gold-light: #e8c96a; --gold-pale: #faf4e4;
+    --tan: #b5956a; --cream: #fdfaf5; --white: #ffffff;
+    --text-dark: #1a2a35; --text-mid: #4a6070; --text-light: #8aa0b0;
+    --border: rgba(13,51,80,0.1);
+    --green: #1D9E75; --green-pale: #e6f4ee; --rose: #993556;
+    --radius: 12px; --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--cream); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 70px; border-bottom: 1px solid rgba(13,51,80,0.1); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 100%; }
+  .nav-logo img { height: 50px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+  .nav-links a { color: var(--text-dark); text-decoration: none; font-size: 13.5px; padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nav-links a:hover { color: var(--navy); background: rgba(13,51,80,0.05); }
+  .nav-links a.active { color: var(--navy); font-weight: 500; }
+  .nav-cta { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .page-hero { background: var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 520px; height: 520px; border-radius: 50%; background: rgba(201,168,76,0.05); pointer-events: none; }
+  .page-hero::after  { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 60px; background: var(--cream); border-radius: 40px 40px 0 0; }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: center; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+  .breadcrumb a { color: rgba(255,255,255,0.4); font-size: 12px; text-decoration: none; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span { color: rgba(255,255,255,0.2); font-size: 12px; }
+  .eyebrow { display: inline-block; color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 50px; font-weight: 500; color: #fff; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { color: rgba(255,255,255,0.55); font-size: 17px; line-height: 1.7; font-weight: 300; max-width: 560px; margin-bottom: 28px; }
+  .search-wrap { display: flex; gap: 8px; max-width: 500px; }
+  .search-input { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 11px 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 9px; background: rgba(255,255,255,0.08); color: #fff; outline: none; transition: border-color 0.2s; }
+  .search-input::placeholder { color: rgba(255,255,255,0.35); }
+  .search-input:focus { border-color: var(--gold); }
+  .search-btn { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 11px 20px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .search-btn:hover { background: var(--gold-light); }
+  .hero-author-panel { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 24px; }
+  .author-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .author-ava { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(201,168,76,0.4); flex-shrink: 0; background: var(--gold); }
+  .author-ava img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .author-info h4 { color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .author-info p  { color: rgba(255,255,255,0.45); font-size: 12px; line-height: 1.4; }
+  .author-creds { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
+  .acred { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 10.5px; padding: 3px 9px; border-radius: 20px; }
+  .author-panel-desc { color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .author-btn { display: block; text-align: center; background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
+  .author-btn:hover { background: var(--gold-light); }
+
+  /* CATEGORIES */
+  .categories { padding: 4rem 3rem 2rem; }
+  .section-header { margin-bottom: 2rem; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 500; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.3px; }
+  .section-header p  { font-size: 15px; color: var(--text-mid); font-weight: 300; }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .cat-card { border-radius: var(--radius-lg); padding: 32px 28px; text-decoration: none; display: block; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; border: 1px solid transparent; }
+  .cat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+  .cat-card::after { content: ''; position: absolute; bottom: -40px; right: -40px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+  .cat-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .cat-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 10px; line-height: 1.3; }
+  .cat-desc { font-size: 14px; line-height: 1.65; font-weight: 300; opacity: 0.75; margin-bottom: 20px; }
+  .cat-footer { display: flex; align-items: center; justify-content: space-between; }
+  .cat-count { font-size: 12.5px; font-weight: 400; opacity: 0.55; }
+  .cat-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.2s; }
+  .cat-btn svg { transition: transform 0.2s; }
+  .cat-card:hover .cat-btn svg { transform: translateX(3px); }
+  .cat-retirement { background: var(--navy); color: #fff; }
+  .cat-retirement  .cat-btn { background: rgba(201,168,76,0.2); color: var(--gold); }
+  .cat-retirement:hover .cat-btn { background: var(--gold); color: var(--navy); }
+  .cat-investing   { background: var(--gold-pale); color: var(--navy); border-color: rgba(201,168,76,0.25); }
+  .cat-investing   .cat-btn { background: var(--gold); color: var(--navy); }
+  .cat-investing:hover .cat-btn { background: var(--gold-light); }
+  .cat-insurance   { background: #f5eaee; color: var(--navy); border-color: rgba(153,53,86,0.12); }
+  .cat-insurance   .cat-btn { background: rgba(153,53,86,0.1); color: var(--rose); }
+  .cat-insurance:hover .cat-btn { background: var(--rose); color: #fff; }
+  .cat-estate      { background: #e8f0f6; color: var(--navy); border-color: rgba(13,51,80,0.1); }
+  .cat-estate      .cat-btn { background: rgba(13,51,80,0.1); color: var(--navy); }
+  .cat-estate:hover .cat-btn { background: var(--navy); color: #fff; }
+  .cat-business    { background: var(--green-pale); color: var(--navy); border-color: rgba(29,158,117,0.18); }
+  .cat-business    .cat-btn { background: rgba(29,158,117,0.12); color: var(--green); }
+  .cat-business:hover .cat-btn { background: var(--green); color: #fff; }
+  .cat-tax         { background: var(--white); color: var(--navy); border-color: var(--border); }
+  .cat-tax         .cat-btn { background: rgba(13,51,80,0.07); color: var(--navy); }
+  .cat-tax:hover   .cat-btn { background: var(--navy); color: #fff; }
+
+  /* LATEST ARTICLES */
+  .latest-section { padding: 0 3rem 5rem; }
+  .latest-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+  .latest-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; color: var(--navy); letter-spacing: -0.3px; }
+  .view-all { font-size: 13.5px; font-weight: 500; color: var(--navy); text-decoration: none; display: flex; align-items: center; gap: 5px; opacity: 0.6; transition: opacity 0.2s; }
+  .view-all:hover { opacity: 1; }
+  .latest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .art-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; display: block; transition: transform 0.2s, border-color 0.2s; }
+  .art-card:hover { transform: translateY(-4px); border-color: rgba(13,51,80,0.18); }
+  .art-thumb { height: 160px; display: flex; align-items: flex-end; padding: 14px; position: relative; overflow: hidden; }
+  .art-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.25)); }
+  .art-cat-tag { font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 20px; position: relative; z-index: 1; }
+  .art-body { padding: 18px 20px 22px; }
+  .art-body h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 8px; }
+  .art-body p  { font-size: 13px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+  .art-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .art-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-light); }
+  .art-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+  .art-read { font-size: 12.5px; font-weight: 500; color: var(--navy); display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .art-card:hover .art-read { gap: 7px; }
+
+  /* NEWSLETTER */
+  .newsletter { background: var(--navy); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .nl-left h2 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 500; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .nl-left p  { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.7; font-weight: 300; }
+  .nl-form { display: flex; flex-direction: column; gap: 10px; }
+  .nl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nl-input { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 9px; background: rgba(255,255,255,0.07); color: #fff; outline: none; transition: border-color 0.2s; }
+  .nl-input::placeholder { color: rgba(255,255,255,0.3); }
+  .nl-input:focus { border-color: var(--gold); }
+  .nl-btn { background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px; border-radius: 9px; border: none; cursor: pointer; transition: background 0.2s; }
+  .nl-btn:hover { background: var(--gold-light); }
+  .nl-note { color: rgba(255,255,255,0.3); font-size: 12px; }
+
+  /* CTA */
+  .cta-band { background: var(--gold); padding: 4rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .cta-band p { color: rgba(13,51,80,0.65); font-size: 15px; font-weight: 300; }
+  .btn-navy { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: 9px; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-navy:hover { background: var(--navy-mid); }
+
+  /* FOOTER */
+  footer { background: #091f30; padding: 3rem; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand strong { display: block; color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .footer-brand .sub { color: var(--gold); font-size: 11.5px; }
+  .footer-brand p { color: rgba(255,255,255,0.35); font-size: 13px; line-height: 1.65; margin-top: 12px; font-weight: 300; }
+  .footer-col h4 { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul a { color: rgba(255,255,255,0.45); font-size: 13.5px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .footer-sun { display: flex; align-items: center; gap: 10px; }
+  .footer-icon { width: 24px; height: auto; display: block; }
+  .footer-sun span { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+  @media (max-width: 1024px) { .cat-grid { grid-template-columns: 1fr 1fr; } .latest-grid { grid-template-columns: 1fr 1fr; } .newsletter { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { nav { padding: 0 1.5rem; } .nav-links { display: none; } .page-hero { padding: 3.5rem 1.5rem 3rem; } .hero-inner { grid-template-columns: 1fr; } .hero-author-panel { display: none; } .categories { padding: 3rem 1.5rem 1.5rem; } .latest-section { padding: 0 1.5rem 3.5rem; } .newsletter { padding: 3rem 1.5rem; } .cta-band { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .footer-top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .page-hero h1 { font-size: 36px; } .cat-grid { grid-template-columns: 1fr; } .latest-grid { grid-template-columns: 1fr; } .nl-row { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; } .nav-logo img { height: 38px !important; } }
+  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher{display:flex;align-items:center;gap:2px;margin-left:12px;padding-left:12px;border-left:1px solid rgba(13,51,80,0.15);}
+  .ls-btn{font-size:12px;font-weight:500;color:var(--text-light);text-decoration:none;padding:4px 7px;border-radius:5px;transition:all .2s;white-space:nowrap;}
+  .ls-btn:hover{color:var(--navy);background:rgba(13,51,80,0.06);}
+  .ls-btn.ls-active{color:var(--navy);background:rgba(13,51,80,0.09);font-weight:600;}
+  @media(max-width:960px){.lang-switcher{margin-left:8px;padding-left:8px;}}
+  @media(max-width:600px){.ls-btn{font-size:11px;padding:3px 5px;}}
+</style>
+
+  <link rel="alternate" hreflang="en"    href="insights.html">
+  <link rel="alternate" hreflang="zh-TW" href="zh-TW/insights.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh-CN/insights.html">
+  <link rel="alternate" hreflang="x-default" href="insights.html">
+  <link rel="canonical" href="zh-CN/insights.html">
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="../LOGO.png" alt="Seven Lakes Financial Services Inc.">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">首页</a></li>
+    <li><a href="about.html">关於王羽恬</a></li>
+    <li><a href="services.html">服务项目</a></li>
+    <li><a href="insights.html">财务知识</a></li>
+    <li><a href="market.html">市场资讯</a></li>
+    <li><a href="contact.html">联絡我们</a></li>
+  </ul>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">免费预約諮詢</a>
+  <div class="lang-switcher"><a href="../insights.html" class="ls-btn">EN</a><a href="../zh-TW/insights.html" class="ls-btn">繁中</a><a href="insights.html" class="ls-btn ls-active">简中</a></div>
+    
+    
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html">首页</a><span>›</span><strong style="color:rgba(255,255,255,0.7);font-weight:400;">Insights</strong></div>
+      <span class="eyebrow">知识中心</span>
+      <h1>财务知识<br><em>from 王羽恬</em></h1>
+      <p class="hero-sub">以淺显易懂的語言，提供退休、投资、保险、遗产规划等各方面的清晰实用指引 — 协助您做出充滿信心的财务决策。</p>
+      <div class="search-wrap">
+        <input class="search-input" type="text" placeholder="搜尋文章 — 例如 RRSP、人寿保险、CPP…">
+        <button class="search-btn">搜尋</button>
+      </div>
+    </div>
+    <div class="hero-author-panel">
+      <div class="author-row">
+        <div class="author-ava"><img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="王羽恬" onerror="this.style.display='none';"></div>
+        <div class="author-info"><h4>王羽恬</h4><p>财务规划師<br>Seven Lakes Financial</p></div>
+      </div>
+      <div class="author-creds"><span class="acred">CEA</span><span class="acred">CLU®</span><span class="acred">MDRT</span><span class="acred">Sun Life</span></div>
+      <p class="author-panel-desc">Carrie shares insights from years of experience helping families and business owners across Ontario and Saskatchewan build lasting financial security.</p>
+      <a href="about.html" class="author-btn">Learn about Carrie →</a>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="section-header">
+    <span class="eyebrow">Browse by topic</span>
+    <h2>选擇您感兴趣的主题</h2>
+    <p>每个章节均由王羽恬撰写，协助您了解各种选擇并做出充滿信心的财务决策。</p>
+  </div>
+  <div class="cat-grid">
+
+    <a href="insights-retirement.html" class="cat-card cat-retirement">
+      <span class="cat-icon">🕐</span>
+      <h3>Retirement planning</h3>
+      <p class="cat-desc">RRSP 策略、CPP 和 OAS 时机、收入预測，以及您按自己方式退休所需的一切知识。</p>
+      <div class="cat-footer">
+        <span class="cat-count">8 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="insights-investing.html" class="cat-card cat-investing">
+      <span class="cat-icon">📈</span>
+      <h3>投资规划</h3>
+      <p class="cat-desc">TFSA、RRSP、RESP、非登记账户及 Sun Life 互惠基金策略——清晰易懂地一一说明。</p>
+      <div class="cat-footer">
+        <span class="cat-count">6 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="insights-insurance.html" class="cat-card cat-insurance">
+      <span class="cat-icon">🛡️</span>
+      <h3>人寿及重大疾病保险</h3>
+      <p class="cat-desc">定期寿险、Sun Life 分紅保险、重大疾病保障——如何为您的家庭选擇合適的保障。</p>
+      <div class="cat-footer">
+        <span class="cat-count">5 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="insights-estate.html" class="cat-card cat-estate">
+      <span class="cat-icon">🏛️</span>
+      <h3>Estate planning</h3>
+      <p class="cat-desc">保护您的财富传承、选擇受益人、遗囑执行職责及财富转移策略。</p>
+      <div class="cat-footer">
+        <span class="cat-count">4 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="insights-business.html" class="cat-card cat-business">
+      <span class="cat-icon">🏢</span>
+      <h3>Business owner solutions</h3>
+      <p class="cat-desc">关键人物保险、買賣协议、企业人寿保险及接班计划。</p>
+      <div class="cat-footer">
+        <span class="cat-count">4 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="insights-tax.html" class="cat-card cat-tax">
+      <span class="cat-icon">💡</span>
+      <h3>Tax tips &amp; strategies</h3>
+      <p class="cat-desc">如何透過善用账户、收入分配及慈善捐贈来減轻税务负擔。</p>
+      <div class="cat-footer">
+        <span class="cat-count">3 篇文章</span>
+        <span class="cat-btn">瀏覽文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section class="latest-section">
+  <div class="latest-header">
+    <h2>最新文章</h2>
+    <a href="insights-investing.html" class="view-all">查看全部 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="latest-grid">
+
+    <a href="articles/investing-which-account-first.html" class="art-card">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#b5956a,#C9A84C);">
+        <span class="art-cat-tag" style="background:rgba(13,51,80,0.85);color:#fff;">Investing</span>
+      </div>
+      <div class="art-body">
+        <h3>TFSA, RRSP, RESP or non-registered — which account should you invest in first?</h3>
+        <p>Most Canadians have limited dollars and multiple account options. Here's the priority order that works for most situations.</p>
+        <div class="art-footer">
+          <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>7 分鐘閱读</span></div>
+          <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="articles/retirement-how-much-to-retire.html" class="art-card">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#0D3350,#1a4a6b);">
+        <span class="art-cat-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Retirement</span>
+      </div>
+      <div class="art-body">
+        <h3>How much do you really need to retire comfortably in Canada?</h3>
+        <p>The "70% rule" is popular — but it isn't right for everyone. A practical guide to calculating your personal target.</p>
+        <div class="art-footer">
+          <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>8 分鐘閱读</span></div>
+          <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="articles/investing-resp-guide.html" class="art-card">
+      <div class="art-thumb" style="background:linear-gradient(135deg,#1D9E75,#0e6b4f);">
+        <span class="art-cat-tag" style="background:rgba(255,255,255,0.9);color:#0e6b4f;">Investing</span>
+      </div>
+      <div class="art-body">
+        <h3>RESP explained: how to maximize the government grant for your child's education</h3>
+        <p>The government gives you $7,200 per child — most families leave money on the table without knowing it.</p>
+        <div class="art-footer">
+          <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>5 分鐘閱读</span></div>
+          <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="nl-left">
+    <span class="eyebrow">保持了解</span>
+    <h2>訂閱王羽恬的每月财务建议</h2>
+    <p>每月一次，直送您的电子郵箱——涵蓋退休、投资、保险及税务策略的实用洞見。 無垃圾郵件，只有清晰且可执行的建议。</p>
+  </div>
+  <div class="nl-form">
+    <div class="nl-row">
+      <input class="nl-input" type="text" placeholder="First name">
+      <input class="nl-input" type="text" placeholder="Last name">
+    </div>
+    <input class="nl-input" type="email" placeholder="您的电子郵件">
+    <select class="nl-input" style="cursor:pointer;">
+      <option value="" disabled selected>我最感兴趣的主题…</option>
+      <option>Retirement planning</option>
+      <option>投资规划（RRSP / TFSA / RESP）</option>
+      <option>人寿及重大疾病保险</option>
+      <option>Estate planning</option>
+      <option>企业主策略</option>
+      <option>Tax tips</option>
+      <option>以上全部</option>
+    </select>
+    <button class="nl-btn" onclick="this.textContent='✓ You\'re subscribed!'; this.style.background='#1D9E75'; this.style.color='#fff';">免费訂閱</button>
+    <p class="nl-note">可隨时退訂。您的资料受到保护。</p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div>
+    <h2>有具体的财务问题嗎？</h2>
+    <p>预約一次免费且無义务的諮詢——王羽恬将为您提供直接的答案，而非销售话术。</p>
+  </div>
+  <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">预約免费諮詢</a>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">王羽恬, CEA, CLU® &nbsp;·&nbsp; Sun Life 顧问</div>
+      <p>协助安大略省及薩斯喀徹溫省的家庭与企业主累积财富、保障所愛，并以信心规划美好未来。</p>
+    </div>
+    <div class="footer-col">
+      <h4>服务项目</h4>
+      <ul>
+        <li><a href="services.html#retirement">退休规划</a></li>
+        <li><a href="services.html#estate">遗产规划</a></li>
+        <li><a href="services.html#business">企业方案</a></li>
+        <li><a href="services.html#investments">投资规划</a></li>
+        <li><a href="services.html#insurance">人寿保险</a></li>
+        <li><a href="services.html#critical">重大疾病保险</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>财务知识</h4>
+      <ul>
+        <li><a href="insights-retirement.html">退休规划</a></li>
+        <li><a href="insights-investing.html">投资规划</a></li>
+        <li><a href="insights-insurance.html">保险</a></li>
+        <li><a href="insights-estate.html">遗产规划</a></li>
+        <li><a href="insights-business.html">企业方案</a></li>
+        <li><a href="insights-tax.html">税务策略</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>联絡我们</h4>
+      <ul>
+        <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">免费预約諮詢</a></li>
+        <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+        <li><a href="tel:6475008885">(647) 500-8885</a></li>
+        <li><a href="contact.html">5775 Yonge St, Suite 1900</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; 王羽恬，CEA、CLU® &nbsp;·&nbsp; 保险业务透過 Sun Life Financial Distributors (Canada) Inc. 承办。</p>
+    <div class="footer-sun"><img src="../ICON.png" alt="Seven Lakes" class="footer-icon"><span>Seven Lakes Financial</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

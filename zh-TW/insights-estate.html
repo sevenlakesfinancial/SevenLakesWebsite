@@ -1,0 +1,368 @@
+market.html<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遺產規劃文章 | Seven Lakes Financial Services Inc.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>:root{--navy:#0D3350;--navy-mid:#1a4a6b;--gold:#C9A84C;--gold-light:#e8c96a;--gold-pale:#faf4e4;--tan:#b5956a;--cream:#fdfaf5;--white:#ffffff;--text-dark:#1a2a35;--text-mid:#4a6070;--text-light:#8aa0b0;--border:rgba(13,51,80,0.1);--green:#1D9E75;--green-pale:#e6f4ee;--rose:#993556;--radius:12px;--radius-lg:20px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--text-dark);background:var(--cream);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;background:var(--cream);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:70px;border-bottom:1px solid rgba(13,51,80,0.1);}
+.nav-logo{display:flex;align-items:center;text-decoration:none;height:100%;}
+.nav-logo img{height:50px;width:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;}
+.nav-links a{color:var(--text-dark);text-decoration:none;font-size:13.5px;padding:6px 12px;border-radius:6px;transition:color .2s,background .2s;}
+.nav-links a:hover{color:var(--navy);background:rgba(13,51,80,.05);}
+.nav-links a.active{color:var(--navy);font-weight:500;}
+.nav-cta{background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 20px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s,transform .15s;white-space:nowrap;}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px);}
+.page-hero{padding:3.5rem 3rem 3rem;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-60px;width:380px;height:380px;border-radius:50%;pointer-events:none;}
+.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:18px;position:relative;z-index:1;}
+.breadcrumb a{font-size:12px;text-decoration:none;transition:color .2s;}
+.breadcrumb span{font-size:12px;}
+.breadcrumb strong{font-size:12px;font-weight:400;}
+.eyebrow{display:inline-block;font-size:11px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1;}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:500;line-height:1.2;margin-bottom:12px;letter-spacing:-.5px;position:relative;z-index:1;}
+.page-hero h1 em{font-style:italic;}
+.hero-sub{font-size:16px;line-height:1.7;font-weight:300;max-width:580px;margin-bottom:22px;position:relative;z-index:1;}
+.hero-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+.meta-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:30px;padding:6px 14px;font-size:12.5px;}
+.meta-pill.dark{background:rgba(13,51,80,0.07);border-color:rgba(13,51,80,0.15);}
+.meta-pill svg{opacity:.55;flex-shrink:0;}
+.topic-bar{background:var(--white);border-bottom:1px solid var(--border);padding:0 3rem;display:flex;align-items:center;gap:4px;overflow-x:auto;}
+.ttab{display:inline-block;padding:14px 16px;font-size:13px;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;}
+.ttab:hover{color:var(--navy);}
+.ttab.active{color:var(--navy);font-weight:500;border-bottom-color:var(--gold);}
+.main-layout{padding:3rem 3rem 5rem;display:grid;grid-template-columns:1fr 290px;gap:3rem;align-items:start;}
+.featured{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:2.5rem;display:grid;grid-template-columns:1fr 1.1fr;transition:border-color .2s,transform .2s;text-decoration:none;}
+.featured:hover{border-color:rgba(13,51,80,.2);transform:translateY(-2px);}
+.feat-cover{min-height:280px;display:flex;flex-direction:column;justify-content:space-between;padding:26px;position:relative;overflow:hidden;}
+.feat-cover::before{content:'';position:absolute;bottom:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.08);}
+.feat-label{display:inline-block;background:var(--gold);color:var(--navy);font-size:10.5px;font-weight:500;padding:4px 12px;border-radius:20px;letter-spacing:.3px;width:fit-content;}
+.feat-num{font-family:'Playfair Display',serif;font-size:90px;font-weight:600;color:rgba(255,255,255,0.06);line-height:1;position:absolute;bottom:10px;right:14px;}
+.feat-body{padding:30px 28px;display:flex;flex-direction:column;justify-content:center;}
+.feat-cat{font-size:11px;font-weight:500;color:var(--tan);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;}
+.feat-body h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:10px;letter-spacing:-.2px;}
+.feat-body p{font-size:14px;color:var(--text-mid);line-height:1.75;font-weight:300;margin-bottom:20px;}
+.feat-info{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-light);margin-bottom:18px;}
+.feat-info .dot{width:3px;height:3px;border-radius:50%;background:var(--border);}
+.read-btn{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px 20px;border-radius:8px;transition:background .2s;width:fit-content;}
+.read-btn:hover{background:var(--navy-mid);}
+.read-btn svg{transition:transform .2s;}
+.featured:hover .read-btn svg{transform:translateX(3px);}
+.grid-label{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;color:var(--navy);margin-bottom:1rem;letter-spacing:-.2px;}
+.article-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.art-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;text-decoration:none;display:block;transition:transform .2s,border-color .2s;}
+.art-card:hover{transform:translateY(-4px);border-color:rgba(13,51,80,.2);}
+.art-cover{height:150px;display:flex;align-items:flex-end;padding:13px;position:relative;overflow:hidden;}
+.art-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(0,0,0,0.3));}
+.art-tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;position:relative;z-index:1;}
+.art-body{padding:18px 20px 20px;}
+.art-body h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--navy);line-height:1.4;margin-bottom:7px;}
+.art-body p{font-size:13px;color:var(--text-mid);line-height:1.6;font-weight:300;}
+.art-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+.art-meta{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-light);}
+.art-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--border);}
+.art-read{font-size:12.5px;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:4px;transition:gap .2s;}
+.art-card:hover .art-read{gap:7px;}
+.sidebar{display:flex;flex-direction:column;gap:18px;position:sticky;top:90px;}
+.sb{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;}
+.sb h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--navy);margin-bottom:12px;}
+.sb.navy{background:var(--navy);border-color:transparent;}
+.sb.navy h3{color:#fff;}
+.sb.navy p{color:rgba(255,255,255,.5);font-size:13px;line-height:1.6;margin-bottom:14px;font-weight:300;}
+.sb.gold{background:var(--gold);border-color:transparent;}
+.sb.gold h3{color:var(--navy);}
+.sb.gold p{color:rgba(13,51,80,.65);font-size:13px;line-height:1.6;margin-bottom:14px;font-weight:300;}
+.carrie-row{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+.carrie-ava{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,76,.4);flex-shrink:0;background:var(--gold);}
+.carrie-ava img{width:100%;height:100%;object-fit:cover;display:block;}
+.carrie-name{color:#fff;font-size:13.5px;font-weight:500;}
+.carrie-role{color:rgba(255,255,255,.4);font-size:11.5px;}
+.sb-btn{display:block;text-align:center;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px;border-radius:8px;text-decoration:none;transition:all .2s;}
+.sb-btn.gold-btn{background:var(--gold);color:var(--navy);}
+.sb-btn.gold-btn:hover{background:var(--gold-light);}
+.sb-btn.navy-btn{background:var(--navy);color:#fff;}
+.sb-btn.navy-btn:hover{background:var(--navy-mid);}
+.sb-btn.white-btn{background:#fff;color:var(--navy);}
+.sb-btn.white-btn:hover{background:#f0f4f8;}
+.cat-list{display:flex;flex-direction:column;gap:6px;}
+.cat-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;text-decoration:none;transition:background .15s;}
+.cat-row:hover{background:var(--cream);}
+.cat-row span{font-size:13px;color:var(--text-dark);}
+.cat-num{font-size:11px;background:var(--gold-pale);color:var(--tan);padding:2px 8px;border-radius:20px;}
+.cat-row.active-cat{background:#e8f0f6;}
+.cat-row.active-cat span{font-weight:500;color:var(--navy);}
+.cat-row.active-cat .cat-num{background:var(--navy);color:#fff;}
+.nl-input{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 13px;border:1px solid rgba(255,255,255,.15);border-radius:7px;background:rgba(255,255,255,.08);color:#fff;outline:none;margin-bottom:8px;}
+.nl-input::placeholder{color:rgba(255,255,255,.35);}
+.nl-input:focus{border-color:var(--gold);}
+.nl-btn{width:100%;background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;}
+.nl-btn:hover{background:var(--gold-light);}
+.quick-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:13px;color:var(--navy);font-weight:300;padding:8px 10px;border:1px solid var(--border);border-radius:8px;transition:all .2s;margin-bottom:8px;}
+.quick-link:last-child{margin-bottom:0;}
+.quick-link:hover{border-color:var(--gold);background:var(--gold-pale);}
+.info-table{width:100%;border-collapse:collapse;}
+.info-table tr{border-bottom:1px solid var(--border);}
+.info-table tr:last-child{border-bottom:none;}
+.info-table td{padding:9px 0;font-size:12.5px;}
+.info-table td:first-child{color:var(--text-mid);font-weight:300;}
+.info-table td:last-child{text-align:right;color:var(--navy);font-weight:500;}
+.cta-band{background:var(--gold);padding:4rem 3rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;}
+.cta-band h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--navy);margin-bottom:6px;}
+.cta-band p{color:rgba(13,51,80,.65);font-size:15px;font-weight:300;}
+.btn-navy{background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:13px 28px;border-radius:9px;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:background .2s;}
+.btn-navy:hover{background:var(--navy-mid);}
+footer{background:#091f30;padding:3rem;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem;}
+.footer-brand strong{display:block;color:#fff;font-size:15px;font-weight:500;margin-bottom:3px;}
+.footer-brand .sub{color:var(--gold);font-size:11.5px;}
+.footer-brand p{color:rgba(255,255,255,.35);font-size:13px;line-height:1.65;margin-top:12px;font-weight:300;}
+.footer-col h4{color:rgba(255,255,255,.5);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:9px;}
+.footer-col ul a{color:rgba(255,255,255,.45);font-size:13.5px;text-decoration:none;font-weight:300;transition:color .2s;}
+.footer-col ul a:hover{color:rgba(255,255,255,.8);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{color:rgba(255,255,255,.25);font-size:12px;}
+.footer-sun{display:flex;align-items:center;gap:10px;}
+.footer-icon{width:24px;height:auto;display:block;}
+.footer-sun span{color:rgba(255,255,255,.35);font-size:12px;}
+@media(max-width:1024px){.main-layout{grid-template-columns:1fr}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr}.featured{grid-template-columns:1fr}.feat-cover{min-height:180px}}
+@media(max-width:960px){nav{padding:0 1.5rem}.nav-links{display:none}.page-hero{padding:2.5rem 1.5rem}.topic-bar{padding:0 1.5rem}.main-layout{padding:2.5rem 1.5rem 3.5rem}.cta-band{grid-template-columns:1fr;padding:3rem 1.5rem}.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.page-hero h1{font-size:32px}.article-grid{grid-template-columns:1fr}.sidebar{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.nav-logo img{height:38px!important}}  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher{display:flex;align-items:center;gap:2px;margin-left:12px;padding-left:12px;border-left:1px solid rgba(13,51,80,0.15);}
+  .ls-btn{font-size:12px;font-weight:500;color:var(--text-light);text-decoration:none;padding:4px 7px;border-radius:5px;transition:all .2s;white-space:nowrap;}
+  .ls-btn:hover{color:var(--navy);background:rgba(13,51,80,0.06);}
+  .ls-btn.ls-active{color:var(--navy);background:rgba(13,51,80,0.09);font-weight:600;}
+  @media(max-width:960px){.lang-switcher{margin-left:8px;padding-left:8px;}}
+  @media(max-width:600px){.ls-btn{font-size:11px;padding:3px 5px;}}
+</style>
+
+  <link rel="alternate" hreflang="en"    href="insights-estate.html">
+  <link rel="alternate" hreflang="zh-TW" href="zh-TW/insights-estate.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh-CN/insights-estate.html">
+  <link rel="alternate" hreflang="x-default" href="insights-estate.html">
+  <link rel="canonical" href="zh-TW/insights-estate.html">
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="../LOGO.png" alt="Seven Lakes Financial Services Inc.">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">首頁</a></li>
+    <li><a href="about.html">關於王羽恬</a></li>
+    <li><a href="services.html">服務項目</a></li>
+    <li><a href="insights.html">財務知識</a></li>
+    <li><a href="market.html">市場資訊</a></li>
+    <li><a href="contact.html">聯絡我們</a></li>
+  </ul>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <a class="nav-cta" href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">免費預約諮詢</a>
+  <div class="lang-switcher"><a href="../insights-estate.html" class="ls-btn">EN</a><a href="insights-estate.html" class="ls-btn ls-active">繁中</a><a href="../zh-CN/insights-estate.html" class="ls-btn">简中</a></div>
+    
+    
+  </div>
+</nav>
+
+<section class="page-hero" style="background:#e8f0f6;">
+  <style>.page-hero::before{background:rgba(13,51,80,0.05);}</style>
+  <div class="breadcrumb">
+    <a href="index.html" style="color:rgba(13,51,80,0.4);">首頁</a>
+    <span style="color:rgba(13,51,80,0.4);opacity:.4;">›</span>
+    <a href="insights.html" style="color:rgba(13,51,80,0.4);">財務知識</a>
+    <span style="color:rgba(13,51,80,0.4);opacity:.4;">›</span>
+    <strong style="color:#1a2a35;opacity:.7;">Estate planning</strong>
+  </div>
+  <span class="eyebrow" style="color:#0D3350;">Estate planning</span>
+  <h1 style="color:#1a2a35;">Protect your legacy & <em style="color:#0D3350;">plan with intention</em></h1>
+  <p class="hero-sub" style="color:#1a2a35;opacity:.7;">由王羽恬（CEA、CLU®）撰寫的受益人指定、遺囑執行職責、遺產平衡及慈善捐贈策略指南, and charitable giving strategies — written by 王羽恬, CEA, CLU®, with specialized expertise in estate administration.</p>
+  <div class="hero-meta">
+    <span class="meta-pill dark" style="color:#1a2a35;opacity:.75;">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 8h8M4 5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      3 articles
+    </span>
+    <span class="meta-pill dark" style="color:#1a2a35;opacity:.75;">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      4–7 分鐘閱讀s
+    </span>
+    <span class="meta-pill dark" style="color:#1a2a35;opacity:.75;">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 14c0-3 2-5 5-5s5 2 5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      By 王羽恬, CEA, CLU®
+    </span>
+  </div>
+</section>
+
+<div class="topic-bar">
+  <a href="insights-retirement.html"  class="ttab ">🕐 退休規劃</a>
+  <a href="insights-investing.html"   class="ttab ">📈 投資規劃</a>
+  <a href="insights-insurance.html"   class="ttab ">🛡️ 保險</a>
+  <a href="insights-estate.html"      class="ttab active">🏛️ 遺產規劃</a>
+  <a href="insights-business.html"    class="ttab ">🏢 企業方案</a>
+  <a href="insights-tax.html"         class="ttab ">💡 稅務策略</a>
+</div>
+
+<div class="main-layout">
+  <div>
+
+    <a href="articles/estate-beneficiary-review.html" class="featured">
+      <div class="feat-cover" style="background:linear-gradient(140deg,#0D3350,#1a4a6b 55%,#2a6090);">
+        <span class="feat-label">精選文章</span>
+        <div class="feat-num">01</div>
+      </div>
+      <div class="feat-body">
+        <div class="feat-cat">遺產規劃基礎</div>
+        <h2>為何您需要審查受益人指定 — and how to do it right</h2>
+        <p>Outdated designations can override your will, cause family conflict, and create major tax consequences. One simple review prevents all of it.</p>
+        <div class="feat-info">
+          <span>王羽恬, CLU®</span><div class="dot"></div>
+          <span>6 分鐘閱讀</span>
+        </div>
+        <span class="read-btn">閱讀完整文章 <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <p class="grid-label">所有遺產規劃文章</p>
+    <div class="article-grid">
+      <a href="articles/estate-executor-guide.html" class="art-card">
+        <div class="art-cover" style="background:linear-gradient(135deg,#1a4a6b,#0D3350);">
+          <span class="art-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">Executor guide</span>
+        </div>
+        <div class="art-body">
+          <h3>加拿大遺囑執行人淺顯指南</h3>
+          <p>Being named an executor is an honour — but it comes with real legal responsibilities and potential personal liability if things go wrong.</p>
+          <div class="art-footer">
+            <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>7 min</span></div>
+            <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </a>
+      <a href="articles/estate-estate-equalization.html" class="art-card">
+        <div class="art-cover" style="background:linear-gradient(135deg,#2a6090,#1a4a6b);">
+          <span class="art-tag" style="background:rgba(201,168,76,0.9);color:#0D3350;">遺產平衡</span>
+        </div>
+        <div class="art-body">
+          <h3>以人壽保險實現遺產平衡 — distributing your estate fairly</h3>
+          <p>When your estate can't simply be split equally, life insurance creates the solution. No forced asset sales, no family conflict.</p>
+          <div class="art-footer">
+            <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>5 min</span></div>
+            <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </a>
+      <a href="articles/estate-charitable-giving.html" class="art-card">
+        <div class="art-cover" style="background:linear-gradient(135deg,#1D9E75,#0e6b4f);">
+          <span class="art-tag" style="background:rgba(255,255,255,0.92);color:#0e6b4f;">Charitable giving</span>
+        </div>
+        <div class="art-body">
+          <h3>Leaving a legacy: tax-efficient charitable giving strategies for your estate</h3>
+          <p>A large donation in the year of death can offset up to 100% of income. Here's how to give more while paying less tax.</p>
+          <div class="art-footer">
+            <div class="art-meta"><span>王羽恬</span><div class="dot"></div><span>5 min</span></div>
+            <span class="art-read">Read <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D3350" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sb navy">
+      <div class="carrie-row">
+        <div class="carrie-ava"><img src="https://hsl-pnw-downloadable-files.s3.amazonaws.com/1485/c5001d3aecf54ad39d5dd5e955c3584f.jpg" alt="王羽恬" onerror="this.style.display='none';"></div>
+        <div><div class="carrie-name">王羽恬</div><div class="carrie-role">CEA、CLU® · MDRT</div></div>
+      </div>
+      <p>對您的遺產規劃或遺囑執行職責有疑問嗎？作為 CEA，王羽恬提供大多數財務顧問無法給予的專業指導。</p>
+      <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="sb-btn gold-btn">預約免費諮詢</a>
+    </div>
+    <div class="sb">
+      <h3>王羽恬的 CEA 資格</h3>
+      <p style="font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.6;margin-bottom:12px;">作為認證遺囑執行顧問（CEA），王羽恬接受了遺產管理的專業培訓——協助客戶及其家人充滿信心地完成遺囑執行程序。</p>
+      <a href="about.html#credentials" class="sb-btn navy-btn">了解 CEA 資格 →</a>
+    </div>
+    <div class="sb">
+      <h3>遺產規劃清單</h3>
+      <table class="info-table">
+        <tr><td>Will</td><td style="color:var(--text-light);font-weight:300;">已更新？</td></tr>
+        <tr><td>受益人指定</td><td style="color:var(--text-light);font-weight:300;">已審查？</td></tr>
+        <tr><td>授權書</td><td style="color:var(--text-light);font-weight:300;">已到位？</td></tr>
+        <tr><td>遺囑執行人</td><td style="color:var(--text-light);font-weight:300;">已知情？</td></tr>
+        <tr><td>遺產平衡</td><td style="color:var(--text-light);font-weight:300;">已規劃？</td></tr>
+      </table>
+    </div>
+    <div class="sb">
+      <h3>所有主題</h3>
+      <div class="cat-list">
+        <a href="insights-retirement.html"  class="cat-row "><span>🕐 退休規劃</span><span class="cat-num">8</span></a>
+        <a href="insights-investing.html"   class="cat-row "><span>📈 投資規劃</span><span class="cat-num">6</span></a>
+        <a href="insights-insurance.html"   class="cat-row "><span>🛡️ 保險</span><span class="cat-num">5</span></a>
+        <a href="insights-estate.html"      class="cat-row active"><span>🏛️ 遺產規劃</span><span class="cat-num">4</span></a>
+        <a href="insights-business.html"    class="cat-row "><span>🏢 企業方案</span><span class="cat-num">4</span></a>
+        <a href="insights-tax.html"         class="cat-row "><span>💡 稅務策略</span><span class="cat-num">3</span></a>
+      </div>
+    </div>
+    <div class="sb navy">
+      <h3>每月電子報</h3>
+      <p>每月一次，由王羽恬提供實用財務建議，絕不發送垃圾郵件。</p>
+      <input class="nl-input" type="email" placeholder="您的電子郵件">
+      <button class="nl-btn" onclick="this.textContent='✓ Subscribed!';this.style.background='#1D9E75';this.style.color='#fff';">免費訂閱</button>
+    </div>
+    <div class="sb gold">
+      <h3>遺產規劃服務</h3>
+      <p>Carrie provides personalized estate planning planning as part of a comprehensive financial strategy.</p>
+      <a href="services.html#estate" class="sb-btn navy-btn">查看遺產規劃服務 →</a>
+    </div>
+  </aside>
+</div>
+
+<section class="cta-band">
+  <div>
+    <h2>想審查您的遺產規劃嗎？</h2>
+    <p>王羽恬將審查您的受益人指定、遺囑執行安排, and estate equalization strategy — and identify any gaps.</p>
+  </div>
+  <a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank" class="btn-navy">預約免費諮詢</a>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Seven Lakes Financial Services Inc.</strong>
+      <div class="sub">王羽恬, CEA, CLU® &nbsp;·&nbsp; Sun Life 顧問</div>
+      <p>協助安大略省及薩斯喀徹溫省的家庭與企業主累積財富、保障所愛，並以信心規劃美好未來。</p>
+    </div>
+    <div class="footer-col"><h4>服務項目</h4><ul>
+      <li><a href="services.html#retirement">退休規劃</a></li>
+      <li><a href="services.html#estate">遺產規劃</a></li>
+      <li><a href="services.html#business">企業方案</a></li>
+      <li><a href="services.html#investments">投資規劃</a></li>
+      <li><a href="services.html#insurance">人壽保險</a></li>
+      <li><a href="services.html#critical">重大疾病保險</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>財務知識</h4><ul>
+      <li><a href="insights-retirement.html">退休規劃</a></li>
+      <li><a href="insights-investing.html">投資規劃</a></li>
+      <li><a href="insights-insurance.html">保險</a></li>
+      <li><a href="insights-estate.html">遺產規劃</a></li>
+      <li><a href="insights-business.html">企業方案</a></li>
+      <li><a href="insights-tax.html">稅務策略</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>聯絡我們</h4><ul>
+      <li><a href="https://action.sunlife.ca/AppointmentRendezvous/s/?AID=%2Fpaf5Ei6pq9F%2BAfm3%2FEaQvm1i1VqCMYYmFDxYlLgKTI%3D&language=en_CA" target="_blank">免費預約諮詢</a></li>
+      <li><a href="mailto:carrie.wang@sunlife.com">carrie.wang@sunlife.com</a></li>
+      <li><a href="tel:6475008885">(647) 500-8885</a></li>
+      <li><a href="contact.html">5775 Yonge St, Suite 1900</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Seven Lakes Financial Services Inc. &nbsp;·&nbsp; 王羽恬，CEA、CLU® &nbsp;·&nbsp; 保險業務透過 Sun Life Financial Distributors (Canada) Inc. 承辦。</p>
+    <div class="footer-sun"><img src="../ICON.png" alt="Seven Lakes" class="footer-icon"><span>Seven Lakes Financial</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
